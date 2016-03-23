@@ -1,9 +1,11 @@
 #include "multiplayer_network.h"
 #include <enet/enet.h>
+#include <iostream>
 
-MultiplayerNetwork::MultiplayerNetwork(int id)
+using namespace std;
+
+MultiplayerNetwork::MultiplayerNetwork()
 {
-	this->id = id;
 }
 
 void MultiplayerNetwork::send_keyboard()

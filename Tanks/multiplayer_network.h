@@ -5,9 +5,9 @@ using namespace std;
 class MultiplayerNetwork
 {
 private:
-	MultiplayerNetwork(int id);
 	int id;
 public:
+	MultiplayerNetwork();
 	void send_keyboard();
 	void send_position();
 	void receive_keyboard();

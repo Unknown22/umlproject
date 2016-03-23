@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <enet/enet.h>
+#include "multiplayer_network.h"
 
 int main()
 {
