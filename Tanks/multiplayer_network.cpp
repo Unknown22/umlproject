@@ -1,14 +1,23 @@
-#include <string>
+#include "multiplayer_network.h"
+#include <enet/enet.h>
 
-using namespace std;
-
-class MultiplayerNetwork
+MultiplayerNetwork::MultiplayerNetwork(int id)
 {
-private:
-	int id;
-public:
-	void send_keyboard();
-	void send_position();
-	void receive_keyboard();
-	void receive_position();
-};
+	this->id = id;
+}
+
+void MultiplayerNetwork::send_keyboard()
+{
+}
+
+void MultiplayerNetwork::send_position()
+{
+}
+
+void MultiplayerNetwork::receive_keyboard()
+{
+}
+
+void MultiplayerNetwork::receive_position()
+{
+}
