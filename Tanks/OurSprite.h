@@ -8,5 +8,8 @@ class OurSprite : public sf::Sprite
 public:
 	OurSprite(string url);
 	~OurSprite();
+
+private:
+	sf::Texture texture;
 };
 

@@ -12,6 +12,8 @@ int main()
 	OurSprite tank("img//p1//playerDown.png");//potrzeba 2 slashy
 	shape.setFillColor(sf::Color::Green);
 
+	
+	tank.setPosition(100, 100);
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -19,11 +21,13 @@ int main()
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
+			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Down)
+				tank.move(0, 1);
 		}
 
 		window.clear();
-		window.draw(tank);
 		window.draw(shape);
+		window.draw(tank);
 		window.display();
 	}
 

@@ -1,7 +1,6 @@
 #include "OurSprite.h"
 using namespace std;
 
-sf::Texture texture;
 
 OurSprite::OurSprite(string url)
 {
