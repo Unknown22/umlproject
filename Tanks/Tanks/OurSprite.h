@@ -11,5 +11,6 @@ public:
 
 private:
 	sf::Texture texture;
+	int width, height;
 };
 

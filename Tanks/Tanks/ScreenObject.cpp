@@ -4,38 +4,41 @@
 
 ScreenObject::ScreenObject()
 {
+	this->x = 30;
+	this->y = 30;
+	this->rotation = 0;
 }
 
 ScreenObject::~ScreenObject()
 {
 }
 
-void ScreenObject::setX(int x)
+void ScreenObject::setX(float x)
 {
 	this->x = x;
 }
 
-void ScreenObject::setY(int y)
+void ScreenObject::setY(float y)
 {
 	this->y = y;
 }
 
-int ScreenObject::getX()
+float ScreenObject::getX()
 {
 	return x;
 }
 
-int ScreenObject::getY()
+float ScreenObject::getY()
 {
 	return y;
 }
 
-void ScreenObject::setRotation(int angle)
+void ScreenObject::setRotation(float angle)
 {
 	this->rotation = angle;
 }
 
-int ScreenObject::getRotation()
+float ScreenObject::getRotation()
 {
 	return rotation;
 }

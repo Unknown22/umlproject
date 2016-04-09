@@ -2,16 +2,16 @@
 class ScreenObject
 {
 private:
-	int x, y, rotation;
+	float x, y, rotation;
 
 public:
 	ScreenObject();
 	~ScreenObject();
-	void setX(int x);
-	void setY(int y);
-	int getX();
-	int getY();
-	void setRotation(int angle);
-	int getRotation();
+	void setX(float x);
+	void setY(float y);
+	float getX();
+	float getY();
+	void setRotation(float angle);
+	float getRotation();
 };
 
