@@ -5,7 +5,8 @@
 Player::Player()
 {
 	hp = MAX_HP;
-	speed = NORMAL_SPEED;
+	vX = 0;
+	vY = 0;
 }
 
 
@@ -24,4 +25,24 @@ void Player::rotate(float angle)
 	int rotation = getRotation();
 	rotation += angle;
 	setRotation(rotation);
+}
+
+void Player::setvX(float vX)
+{
+	this->vX = vX;
+}
+
+float Player::getvX()
+{
+	return vX;
+}
+
+void Player::setvY(float vY)
+{
+	this->vY = vY;
+}
+
+float Player::getvY()
+{
+	return vY;
 }

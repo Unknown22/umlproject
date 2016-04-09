@@ -10,6 +10,6 @@ public:
 	playerController(string url);
 	~playerController();
 	void update();
-	void handleKeyboardEvent(sf::Event event);
+	void handleKeyboardEvent();
 };
 

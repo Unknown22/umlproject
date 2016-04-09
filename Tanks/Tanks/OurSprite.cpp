@@ -8,8 +8,8 @@ OurSprite::OurSprite(string url)
 	this->setTexture(texture);
 	width = this->getTextureRect().width;
 	height = this->getTextureRect().height;
-	float xOrigin = width / 2;
-	float yOrigin = height / 2;
+	float xOrigin = (float)width / 2;
+	float yOrigin = (float)height / 2;
 	this->setOrigin(xOrigin, yOrigin);
 }
 
