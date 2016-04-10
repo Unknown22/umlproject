@@ -7,7 +7,9 @@
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(640, 480), "Tanks!");
+	const int WINDOW_WIDTH = 640;
+	const int WINDOW_HEIGHT = 480;
+	sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Tanks!");
 	playerController p1("img//p1//playerDown.png");//potrzeba 2 slashe
 
 	while (window.isOpen())
