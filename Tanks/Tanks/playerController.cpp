@@ -18,16 +18,20 @@ void playerController::update()
 	float x = player.getX();
 	float y = player.getY();
 	float rotation = player.getRotation();
-	x += player.getvX();
-	y += player.getvY();
+	float vX = player.getvX();
+	float vY = player.getvY();
+	x += vX;
+	y += vY;
 	player.setX(x);
 	player.setY(y);
-	this->setPosition(x, y);
+	this->move(vX, vY);
 	this->setRotation(rotation);
 }
 
 void playerController::handleKeyboardEvent()
 {
+	player.setvX(0);
+	player.setvY(0);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
 		player.setvX(-player.NORMAL_SPEED * sin((player.getRotation()*M_PI) / 180.0f));
@@ -37,11 +41,6 @@ void playerController::handleKeyboardEvent()
 	{
 		player.setvX(player.NORMAL_SPEED * sin((player.getRotation()*M_PI) / 180.0f));
 		player.setvY(-player.NORMAL_SPEED * cos((player.getRotation()*M_PI) / 180.0f));
-	}
-	else
-	{
-		player.setvX(0);
-		player.setvY(0);
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
