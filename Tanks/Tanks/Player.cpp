@@ -22,7 +22,7 @@ void Player::gettingHit()
 
 void Player::rotate(float angle)
 {
-	int rotation = getRotation();
+	float rotation = getRotation();
 	rotation += angle;
 	setRotation(rotation);
 }
