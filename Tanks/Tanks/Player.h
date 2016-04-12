@@ -9,8 +9,8 @@ private:
 
 public:
 	const int MAX_HP = 5;
-	const int NORMAL_SPEED = 4;
-	const int NORMAL_ROTATION_ANGLE = 3;
+	const float NORMAL_SPEED = 0.1;
+	const float NORMAL_ROTATION_ANGLE = 0.1;
 	Player();
 	~Player();
 	void gettingHit();

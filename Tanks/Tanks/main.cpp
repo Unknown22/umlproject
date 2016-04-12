@@ -19,9 +19,10 @@ int main()
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
-			p1.handleKeyboardEvent();
-			p1.update();
+			
 		}
+		p1.handleKeyboardEvent();
+		p1.update();
 
 		window.clear();
 		window.draw(p1);
