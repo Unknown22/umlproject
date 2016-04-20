@@ -14,7 +14,7 @@ int main()
 {
 	MultiplayerServer serwer;
 
-	serwer.start_server(1234);
+	serwer.start_server(1234, 2);
 
 	thread tServer(listen_server, &serwer);
 	tServer.join();
