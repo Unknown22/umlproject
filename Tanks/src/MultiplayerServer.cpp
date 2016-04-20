@@ -3,6 +3,7 @@
 #include <cstdio>
 #include <iostream>
 #include <string>
+#include <cstring>
 
 MultiplayerServer::MultiplayerServer()
 {
@@ -89,13 +90,16 @@ void MultiplayerServer::listen()
 			std::string port_str = std::to_string(event.peer->address.port);
 
 			std::string nazwa = std::string(bufadres) + ":" + port_str;
-			event.peer->data;
+
+			std::string * p_nazwa = &nazwa;
+			event.peer->data = p_nazwa;
 			peer=event.peer;
 			break;
 		}
 		case ENET_EVENT_TYPE_RECEIVE:
-			printf("%x says %s on channel %u\n",
-				(char*)event.peer -> data,event.packet -> data,event.channelID);
+			char bufadres[256];
+			enet_address_get_host_ip(&event.peer->address, bufadres, sizeof(bufadres));
+			std::cout << bufadres << ":" << event.peer->address.port << " przesyla wiadomosc " << (char*)event.packet->data << " na kanale " << (u_int)event.channelID << std::endl;
 			fflush(stdout);
 			enet_packet_destroy (event.packet); // clean up the packet now that we're done using it
 			send_packet(0,"Data Received") ;
@@ -103,8 +107,8 @@ void MultiplayerServer::listen()
 		case ENET_EVENT_TYPE_DISCONNECT:
 			printf("  host disconnected.\n");
 			fflush(stdout);
+			event.peer->data = 0; // reset the peer's client information.
 			free(event.peer -> data);
-			event.peer -> data = 0; // reset the peer's client information.
 			peer=0;
 		default:
 			break;

@@ -17,6 +17,9 @@ int main()
 	serwer.start_server(1234);
 
 	thread tServer(listen_server, &serwer);
+	tServer.join();
+
+	serwer.stop_server();
 
 	_getch();
 	return 0;

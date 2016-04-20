@@ -35,20 +35,27 @@ void MultiplayerClient::stop_client()
 	std::cout << "Niszcze klienta" << std::endl;
 }
 
-void MultiplayerClient::send_packet(int _channel, const char* _pack)
+void MultiplayerClient::send_packet(int _channel)
 {
+	const char* message_c = message.c_str();
 	/* Create a reliable packet of size 7 containing "packet\0" */
-	ENetPacket * packet = enet_packet_create(_pack,
-		strlen(_pack) + 1,
+	ENetPacket * packet = enet_packet_create(message_c,
+		strlen(message_c) + 1,
 		ENET_PACKET_FLAG_UNRELIABLE_FRAGMENT);
 
 
 	/* Send the packet to the peer over channel id 0. */
 	/* One could also broadcast the packet by         */
 	/* enet_host_broadcast (host, 0, packet);         */
+
 	enet_peer_send(peer, _channel, packet);
 	/* One could just use enet_host_service() instead. */
 	enet_host_flush(client);
+}
+
+void MultiplayerClient::set_message(std::string _message)
+{
+	this->message = _message;
 }
 
 int MultiplayerClient::init_client()
@@ -81,7 +88,6 @@ void MultiplayerClient::connect_to_server()
 		event.type == ENET_EVENT_TYPE_CONNECT)
 	{
 		puts("Connection succeeded.");
-		send_packet(0, "test");
 	}
 	else
 	{
@@ -90,5 +96,49 @@ void MultiplayerClient::connect_to_server()
 		/* had run out without any significant event.            */
 		enet_peer_reset(peer);
 		puts("Connection failed.");
+	}
+}
+
+
+void MultiplayerClient::listen()
+{
+	ENetEvent event;
+	// processing incoming events:
+	while (enet_host_service(client, &event, 1000) >= 0)
+	{
+		//printf("Checking Incoming\n");
+		switch (event.type)
+		{
+		case ENET_EVENT_TYPE_CONNECT:
+		{
+			char bufadres[256];
+			enet_address_get_host_ip(&event.peer->address, bufadres, sizeof(bufadres));
+			std::cout << "Nowe polaczenie nawiazane od: " << bufadres << ":" << event.peer->address.port << std::endl;
+
+			std::string port_str = std::to_string(event.peer->address.port);
+
+			std::string nazwa = std::string(bufadres) + ":" + port_str;
+
+			std::string * p_nazwa = &nazwa;
+			event.peer->data = p_nazwa;
+			peer = event.peer;
+			break;
+		}
+		case ENET_EVENT_TYPE_RECEIVE:
+			char bufadres[256];
+			enet_address_get_host_ip(&event.peer->address, bufadres, sizeof(bufadres));
+			std::cout << bufadres << ":" << event.peer->address.port << " przesyla wiadomosc " << (char*)event.packet->data << " na kanale " << (u_int)event.channelID << std::endl;
+			fflush(stdout);
+			enet_packet_destroy(event.packet); // clean up the packet now that we're done using it
+			break;
+		case ENET_EVENT_TYPE_DISCONNECT:
+			printf("  host disconnected.\n");
+			fflush(stdout);
+			event.peer->data = 0; // reset the peer's client information.
+			free(event.peer->data);
+			peer = 0;
+		default:
+			break;
+		}
 	}
 }
