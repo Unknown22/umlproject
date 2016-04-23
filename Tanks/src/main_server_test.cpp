@@ -10,7 +10,7 @@ void listen_server(MultiplayerServer * _serwer)
 	_serwer->listen();
 }
 
-int main()
+int main_server()
 {
 	MultiplayerServer serwer;
 

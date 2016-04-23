@@ -21,7 +21,7 @@ void send_message(MultiplayerClient klient, string message)
 	}
 }
 
-int main()
+int main_klient()
 {
 	MultiplayerClient klient;
 
