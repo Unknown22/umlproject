@@ -6,6 +6,7 @@ class playerController :
 {
 private:
 	Player player;
+	void handleMissilesUpdate();
 public:
 	playerController(string url);
 	~playerController();

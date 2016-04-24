@@ -6,8 +6,9 @@ class Missile :
 private:
 	float vX, vY;
 public:
-	const int NORMAL_SPEED = 8;
+	const float NORMAL_SPEED=0.02f;
 	Missile(float x, float y, float vX, float vY);
+	Missile(Missile &);
 	~Missile();
 	void setvX(float vX);
 	float getvX();

@@ -11,6 +11,10 @@ Missile::Missile(float x, float y, float vX, float vY)
 	this->vY = vY;
 }
 
+Missile::Missile(Missile &)
+{
+}
+
 
 Missile::~Missile()
 {

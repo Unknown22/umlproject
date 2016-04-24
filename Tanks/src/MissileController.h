@@ -8,7 +8,8 @@ private:
 	Missile * missile;
 public:
 	MissileController(string url, float x, float y, float vX, float vY);
-	~MissileController();
+	MissileController(string url, Missile & miss);
+	virtual ~MissileController();
 	void update();
 };
 

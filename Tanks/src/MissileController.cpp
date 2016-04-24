@@ -10,9 +10,16 @@ MissileController::MissileController(string url, float x, float y, float vX, flo
 	this->setPosition(x, y);
 }
 
+MissileController::MissileController(string url, Missile & miss)
+	: OurSprite(url),
+	missile(&miss)
+{
+	this->setPosition(missile->getX(), missile->getY());
+}
+
 MissileController::~MissileController()
 {
-	delete missile;
+	//delete missile;
 }
 
 void MissileController::update()
