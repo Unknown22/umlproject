@@ -19,7 +19,6 @@ MissileController::MissileController(string url, Missile & miss)
 
 MissileController::~MissileController()
 {
-	//delete missile;
 }
 
 void MissileController::update()

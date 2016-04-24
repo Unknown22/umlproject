@@ -6,11 +6,14 @@ class playerController :
 {
 private:
 	Player player;
+	void shot(Missile & miss);
 	void handleMissilesUpdate();
 public:
+	std::vector<MissileController> missiles;
 	playerController(string url);
 	~playerController();
 	void update();
 	void handleKeyboardEvent();
+	std::vector<MissileController> * getMissiles();
 };
 

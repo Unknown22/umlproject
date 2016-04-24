@@ -9,7 +9,6 @@ int main()
 	const int WINDOW_HEIGHT = 480;
 	sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Tanks!");
 	playerController p1("img//p1//playerDown.png");//potrzeba 2 slashe
-
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -24,6 +23,13 @@ int main()
 
 		window.clear();
 		window.draw(p1);
+		if (p1.missiles.empty() == false)
+		{
+			for (int i = 0; i < p1.missiles.size(); i++)
+			{
+				window.draw(p1.missiles[i]);
+			}
+		}
 		window.display();
 	}
 

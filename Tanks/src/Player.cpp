@@ -46,19 +46,3 @@ float Player::getvY()
 {
 	return vY;
 }
-
-void Player::shot(Missile & miss)
-{
-	MissileController oneMissile("img//missile.png", miss);
-	missiles.push_back(oneMissile);
-}
-
-int Player::getNumberOfMissiles()
-{
-	return missiles.size();
-}
-
-std::list<MissileController> Player::getMissiles()
-{
-	return missiles;
-}

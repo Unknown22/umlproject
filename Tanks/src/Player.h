@@ -1,14 +1,12 @@
 #pragma once
 #include "ScreenObject.h"
 #include "MissileController.h"
-#include <list>
 class Player :
 	public ScreenObject
 {
 private:
 	int hp;
 	float vX, vY;
-	std::list<MissileController> missiles;
 
 public:
 	const int MAX_HP = 5;
@@ -22,8 +20,5 @@ public:
 	float getvX();
 	void setvY(float vY);
 	float getvY();
-	void shot(Missile & miss);
-	int getNumberOfMissiles();
-	std::list<MissileController> getMissiles();
 };
 

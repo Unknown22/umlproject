@@ -2,6 +2,7 @@
 #define M_PI       3.14159265358979323846
 
 
+
 playerController::playerController(string url)
 	: OurSprite(url)
 {
@@ -11,6 +12,12 @@ playerController::playerController(string url)
 
 playerController::~playerController()
 {
+}
+
+void playerController::shot(Missile & miss)
+{
+	MissileController oneMissile("img//missile.png", miss);
+	missiles.push_back(oneMissile);
 }
 
 void playerController::update()
@@ -26,24 +33,20 @@ void playerController::update()
 	player.setY(y);
 	this->move(vX, vY);
 	this->setRotation(rotation);
-	//handleMissilesUpdate();
+	handleMissilesUpdate();
 	
 }
 
-/*void playerController::handleMissilesUpdate()
+void playerController::handleMissilesUpdate()
 {
-	//std::list<MissileController> tempMissiles=;
-	//std::list<MissileController>::iterator i;
-	if (player.getMissiles().empty() == false)
+	if (missiles.empty() == false)
 	{
-		MissileController * ptrMiss= &player.getMissiles().front();
-		ptrMiss->update();
-		//for (ptrMiss = &tempMissiles.front(); ptrMiss != &tempMissiles.back(); ptrMiss++)
-		//{
-		//	ptrMiss->update();
-		//}
+		for (int i = 0; i < missiles.size(); i++)
+		{
+			missiles[i].update();
+		}
 	}
-}*/
+}
 
 void playerController::handleKeyboardEvent()
 {
@@ -72,7 +75,12 @@ void playerController::handleKeyboardEvent()
 		float missVY = missile.NORMAL_SPEED * cos((player.getRotation()*M_PI) / 180.0f);
 		missile.setvX(missVX);
 		missile.setvY(missVY);
-		player.shot(missile);
+		shot(missile);
 	}
 
+}
+
+std::vector<MissileController> * playerController::getMissiles()
+{
+ 	return &missiles;
 }
