@@ -7,6 +7,7 @@ class playerController :
 private:
 	Player player;
 	void shot(Missile & miss);
+	void handlePlayerUpdate();
 	void handleMissilesUpdate();
 public:
 	std::vector<MissileController> missiles;

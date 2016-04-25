@@ -20,7 +20,7 @@ void playerController::shot(Missile & miss)
 	missiles.push_back(oneMissile);
 }
 
-void playerController::update()
+void playerController::handlePlayerUpdate()
 {
 	float x = player.getX();
 	float y = player.getY();
@@ -33,6 +33,11 @@ void playerController::update()
 	player.setY(y);
 	this->move(vX, vY);
 	this->setRotation(rotation);
+}
+
+void playerController::update()
+{
+	handlePlayerUpdate();
 	handleMissilesUpdate();
 	
 }
