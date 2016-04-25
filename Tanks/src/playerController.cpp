@@ -1,4 +1,5 @@
 #include "playerController.h"
+#include <iostream>
 #define M_PI       3.14159265358979323846
 
 
@@ -16,8 +17,9 @@ playerController::~playerController()
 
 void playerController::shot(Missile & miss)
 {
-	MissileController oneMissile("img//missile.png", miss);
+	MissileController * oneMissile=new MissileController("img//missile.png", miss);
 	missiles.push_back(oneMissile);
+	//cout<<missiles.back()->getPosition().x<<endl;
 }
 
 void playerController::handlePlayerUpdate()
@@ -48,7 +50,8 @@ void playerController::handleMissilesUpdate()
 	{
 		for (int i = 0; i < missiles.size(); i++)
 		{
-			missiles[i].update();
+			cout << missiles.back()->getPosition().x << endl;
+			missiles[i]->update();
 		}
 	}
 }
@@ -83,9 +86,4 @@ void playerController::handleKeyboardEvent()
 		shot(missile);
 	}
 
-}
-
-std::vector<MissileController> * playerController::getMissiles()
-{
- 	return &missiles;
 }
