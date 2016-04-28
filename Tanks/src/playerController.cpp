@@ -15,12 +15,6 @@ playerController::~playerController()
 {
 }
 
-void playerController::shot(Missile & miss)
-{
-	MissileController * oneMissile=new MissileController("img//missile.png", miss);
-	missiles.push_back(oneMissile);
-	//cout<<missiles.back()->getPosition().x<<endl;
-}
 
 void playerController::handlePlayerUpdate()
 {
@@ -33,6 +27,7 @@ void playerController::handlePlayerUpdate()
 	y += vY;
 	player.setX(x);
 	player.setY(y);
+	//this->setOrigin(x+(this->getWidth()/2), y+(this->getHeight()/2));
 	this->move(vX, vY);
 	this->setRotation(rotation);
 }
@@ -50,8 +45,8 @@ void playerController::handleMissilesUpdate()
 	{
 		for (int i = 0; i < missiles.size(); i++)
 		{
-			cout << missiles.back()->getPosition().x << endl;
-			missiles[i]->update();
+			//cout << missiles.back()->getPosition().x << endl;
+			missiles[i].update();
 		}
 	}
 }
@@ -78,12 +73,14 @@ void playerController::handleKeyboardEvent()
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
-		Missile missile(player.getX(), player.getY(), 0, 0);
-		float missVX = missile.NORMAL_SPEED * sin((player.getRotation()*M_PI) / 180.0f);
+		MissileController missile("img//missile.png", this->getOrigin().x, this->getOrigin().y, 0, 0);
+		float missVX = -missile.NORMAL_SPEED * sin((player.getRotation()*M_PI) / 180.0f);
 		float missVY = missile.NORMAL_SPEED * cos((player.getRotation()*M_PI) / 180.0f);
 		missile.setvX(missVX);
 		missile.setvY(missVY);
-		shot(missile);
+		//missiles.emplace_back();
+		missiles.push_back(missile);
+		//cout << missiles.back().getPosition().x << endl;
 	}
 
 }

@@ -1,15 +1,18 @@
 #pragma once
 #include "OurSprite.h"
-#include "Missile.h"
 class MissileController :
 	public OurSprite
 {
 private:
-	Missile * missile;
+	float vX, vY;
 public:
 	MissileController(string url, float x, float y, float vX, float vY);
-	MissileController(string url, Missile & miss);
+	const float NORMAL_SPEED = 0.08f;
 	virtual ~MissileController();
 	void update();
+	void setvX(float vX);
+	float getvX();
+	void setvY(float vY);
+	float getvY();
 };
 

@@ -6,16 +6,9 @@
 MissileController::MissileController(string url, float x, float y, float vX, float vY)
 	: OurSprite(url)
 {
-	missile=new Missile(x, y, vX, vY);
 	this->setPosition(x, y);
 }
 
-MissileController::MissileController(string url, Missile & miss)
-	: OurSprite(url),
-	missile(&miss)
-{
-	this->setPosition(missile->getX(), missile->getY());
-}
 
 MissileController::~MissileController()
 {
@@ -23,13 +16,24 @@ MissileController::~MissileController()
 
 void MissileController::update()
 {
-	float x = missile->getX();
-	float y = missile->getY();
-	float vX = missile->getvX();
-	float vY = missile->getvY();
-	x += vX;
-	y += vY;
-	missile->setX(x);
-	missile->setY(y);
-	this->move(vX, vY);
+	this->move(getvX(), getvY());
+}
+void MissileController::setvX(float vX)
+{
+	this->vX = vX;
+}
+
+float MissileController::getvX()
+{
+	return vX;
+}
+
+void MissileController::setvY(float vY)
+{
+	this->vY = vY;
+}
+
+float MissileController::getvY()
+{
+	return vY;
 }

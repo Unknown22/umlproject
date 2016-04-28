@@ -27,7 +27,7 @@ int main()
 		{
 			for (int i = 0; i < p1.missiles.size(); i++)
 			{
-				window.draw(*p1.missiles[i]);
+				window.draw(p1.missiles[i]);
 			}
 		}
 		window.display();

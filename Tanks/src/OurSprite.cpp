@@ -17,3 +17,13 @@ OurSprite::OurSprite(string url)
 OurSprite::~OurSprite()
 {
 }
+
+int OurSprite::getWidth()
+{
+	return width;
+}
+
+int OurSprite::getHeight()
+{
+	return height;
+}
