@@ -44,8 +44,19 @@ void playerController::handleMissilesUpdate()
 	{
 		for (int i = 0; i < missiles.size(); i++)
 		{
-			//cout << missiles.back()->getPosition().x << endl;
 			missiles[i].update();
+		}
+		for (int i = 0; i < missiles.size(); i++)
+		{
+			
+			if (missiles[i].isInactive() == true)
+			{
+				//cout << "x: " << missiles[i].getPosition().x << endl;
+				//cout << "y: " << missiles[i].getPosition().y << endl;
+				//cout << endl;
+				missiles.erase(missiles.begin() + i);
+			}
+				
 		}
 	}
 }
