@@ -14,6 +14,9 @@ int main()
 	tmx::TileMap map("img//maps//test_map.tmx");
 	map.ShowObjects();
 	map.GetLayer("map").visible = true;
+	map.GetLayer("collision").visible = false;
+
+
 
 
 	while (window.isOpen())
