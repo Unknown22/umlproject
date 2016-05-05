@@ -15,6 +15,9 @@ MissileController::MissileController(string url, float x, float y, float vX, flo
 
 MissileController & MissileController::operator=(const MissileController & otherMissile)
 {
+	this->vX = otherMissile.vX;
+	this->vY = otherMissile.vY;
+	this->setPosition(otherMissile.getPosition().x, otherMissile.getPosition().y);
 	return *this;
 }
 
