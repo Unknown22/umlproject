@@ -2,6 +2,7 @@
 #include "playerController.h"
 #include <iostream>
 #include "ConstantVariables.h"
+#include "STP/TMXLoader.hpp"
 
 
 
@@ -9,6 +10,12 @@ int main()
 {
 	sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Tanks!");
 	playerController p1("img//p1//playerDown.png");//potrzeba 2 slashe
+
+	tmx::TileMap map("img//maps//test_map.tmx");
+	map.ShowObjects();
+	map.GetLayer("map").visible = true;
+
+
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -22,7 +29,11 @@ int main()
 		p1.update();
 
 		window.clear();
+		window.draw(map);
 		window.draw(p1);
+
+
+
 		if (p1.missiles.empty() == false)
 		{
 			for (int i = 0; i < p1.missiles.size(); i++)
