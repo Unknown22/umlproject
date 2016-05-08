@@ -82,15 +82,15 @@ void runMenu() {
 }
 
 void runGame() {
-	playerController p1("data//img//p1//playerDown.png");//potrzeba 2 slashe
 	Logic logic;
 	ClientLogic clLogic;
-
+	
 	tmx::TileMap map("data//img//maps//test_map.tmx");
 	map.ShowObjects();
 	map.GetLayer("map").visible = true;
 	map.GetLayer("collision").visible = false;
 
+	clLogic.listen(logic.init());
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -100,23 +100,16 @@ void runGame() {
 				window.close();
 
 		}
-		//p1.handleKeyboardEvent();
-		//p1.update();
-		//logic.init();
+
 		logic.listen(clLogic.handleKeyboard());
 		clLogic.listen(logic.send());
 		window.clear();
 		window.draw(map);
-		window.draw(clLogic.p1);
-		/*window.draw(p1);
-
-		if (p1.missiles.empty() == false)
-		{
-			for (int i = 0; i < p1.missiles.size(); i++)
-			{
-				window.draw(p1.missiles[i]);
-			}
-		}*/
+		typedef std::map<std::string, SpriteClient>::iterator it_type;
+		for (it_type iterator = clLogic.spriteMap.begin(); iterator != clLogic.spriteMap.end(); iterator++) {
+			window.draw(iterator->second);
+		}
+		
 		window.display();
 	}
 }

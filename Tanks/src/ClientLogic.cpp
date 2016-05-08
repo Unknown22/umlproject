@@ -16,12 +16,22 @@ void ClientLogic::listen(std::string statement)
 			{
 				if (objectSt[0] == "spawn")
 				{
-					//tutaj jeszcze spawn dla nowych obiektów, narazie tak dal testu
 					float x = std::stof(objectSt[2]);
 					float y = std::stof(objectSt[3]);
 					float r = std::stof(objectSt[4]);
-					p1.setPosition(x, y);
-					p1.setRotation(r);
+					if (objectSt[1] == "p1")
+					{
+						SpriteClient sprCl("data//img//p1//playerDown.png", x, y, r);
+						spriteMap.insert(std::pair<string, SpriteClient>(objectSt[1], sprCl));
+					}
+					else if(objectSt[1] == "p2")
+					{
+
+					}
+					else
+					{
+
+					}
 				}
 				else if (objectSt[0] == "delete")
 				{
@@ -29,16 +39,15 @@ void ClientLogic::listen(std::string statement)
 				}
 				else
 				{
-					if (objectSt[0] == "p1")
-					{
-						float x = std::stof(objectSt[1]);
-						float y = std::stof(objectSt[2]);
-						float r = std::stof(objectSt[3]);
-						p1.setPosition(x, y);
-						p1.setRotation(r);
+					float x = std::stof(objectSt[1]);
+					float y = std::stof(objectSt[2]);
+					float r = std::stof(objectSt[3]);
+					typedef std::map<std::string, SpriteClient>::iterator it_type;
+					for (it_type iterator = spriteMap.begin(); iterator != spriteMap.end(); iterator++) {
+						iterator->second.setPosition(x, y);
+						iterator->second.setRotation(r);
 					}
 				}
-				
 			}
 		}
 	}
@@ -92,7 +101,6 @@ std::string ClientLogic::handleKeyboard()
 }
 
 ClientLogic::ClientLogic()
-	:p1("data//img//p1//playerDown.png", 440, 320, 180)
 {
 
 }
