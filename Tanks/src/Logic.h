@@ -14,5 +14,6 @@ public:
 	std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems);
 private:
 	Player p1, p2;
+	void handlePlayerUpdate();
 };
 

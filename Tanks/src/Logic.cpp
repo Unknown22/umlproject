@@ -1,4 +1,5 @@
 #include "Logic.h"
+#include <iostream>
 #define M_PI       3.14159265358979323846
 
 
@@ -16,7 +17,7 @@ string Logic::init()
 	p1.setX(440);
 	p1.setY(320);
 	p1.setRotation(180);
-	string s = "spawn>p1>440;320;180"; //stan poczatkowy, pozycja: x;y;rotation
+	string s = "spawn>p1>440>320>180;"; //stan poczatkowy, pozycja: x>y>rotation
 	return s;
 }
 
@@ -52,6 +53,7 @@ void Logic::listen(std::string statement)
 			{
 				//obsluga dla strzelania
 			}
+			handlePlayerUpdate();
 		}
 	}
 }
@@ -59,7 +61,7 @@ void Logic::listen(std::string statement)
 string Logic::send()
 {
 	std::stringstream ss;
-	ss << "p1<" << p1.getX() << ";" << p1.getY() << ";" << p1.getRotation();
+	ss << "p1>" << p1.getX() << ">" << p1.getY() << ">" << p1.getRotation() << ";";
 	//tutaj dodanie p2 i wszystich pocisków
 	return ss.str();;
 }
@@ -72,4 +74,18 @@ std::vector<std::string>& Logic::split(const std::string & s, char delim, std::v
 		elems.push_back(item);
 	}
 	return elems;
+}
+
+void Logic::handlePlayerUpdate()
+{
+	float x = p1.getX();
+	float y = p1.getY();
+	float rotation = p1.getRotation();
+	float vX = p1.getvX();
+	float vY = p1.getvY();
+	x += vX;
+	y += vY;
+	p1.setX(x);
+	p1.setY(y);
+	//std::cout << x << " " << y << endl;
 }
