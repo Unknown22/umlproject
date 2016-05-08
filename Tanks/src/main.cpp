@@ -13,7 +13,7 @@ sf::Font font;
 void menuConstr() {
 	state = END;
 
-	if (!font.loadFromFile("data//img//font//batmfa.ttf"))
+	if (!font.loadFromFile("data//font//batmfa.ttf"))
 	{
 		cout << "Font not found!" << endl;
 		return;
