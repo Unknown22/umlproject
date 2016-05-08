@@ -51,17 +51,31 @@ void Logic::listen(std::string statement)
 			}
 			else if (elems[i] == "space")
 			{
-				shot();
+				addState=shot();
 			}
 			handlePlayerUpdate();
 		}
 	}
+	handleMissilesUpdate();
 }
 
 string Logic::send()
 {
 	std::stringstream ss;
 	ss << "p1>" << p1.getX() << ">" << p1.getY() << ">" << p1.getRotation() << ";";
+	if (addState.empty() == false)
+	{
+		ss << addState;
+	}
+		
+	addState.erase();
+	if (missiles.empty() == false)
+	{
+		for (int i = 0; i < missiles.size(); i++)
+		{
+			ss << "m" << i << ">" << missiles[i].getX() << ">" << missiles[i].getY() << ">" << 0 << ";";
+		}
+	}
 	//tutaj dodanie p2 i wszystich pocisków
 	return ss.str();;
 }
@@ -102,4 +116,24 @@ void Logic::handlePlayerUpdate()
 	p1.setX(x);
 	p1.setY(y);
 	//std::cout << x << " " << y << endl;
+}
+
+void Logic::handleMissilesUpdate()
+{
+	if (missiles.empty() == false)
+	{
+		for (int i = 0; i < missiles.size(); i++)
+		{
+			missiles[i].update();
+		}
+		for (int i = 0; i < missiles.size(); i++)
+		{
+
+			if (missiles[i].isInactive() == true)
+			{
+				missiles.erase(missiles.begin() + i);
+			}
+
+		}
+	}
 }

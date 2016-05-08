@@ -18,5 +18,7 @@ public:
 private:
 	Player p1, p2;
 	void handlePlayerUpdate();
+	void handleMissilesUpdate();
+	string addState;
 };
 

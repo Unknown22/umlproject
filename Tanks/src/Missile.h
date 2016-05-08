@@ -4,14 +4,17 @@ class Missile :
 	public ScreenObject
 {
 private:
-	float vX, vY;
+	float vX, vY, x, y;
 public:
-	const float NORMAL_SPEED=0.02f;
+	const float NORMAL_SPEED=0.8f;
 	Missile(float x, float y, float vX, float vY);
+	Missile & operator=(const Missile & otherMissile);
 	~Missile();
 	void setvX(float vX);
 	float getvX();
 	void setvY(float vY);
 	float getvY();
+	bool isInactive();
+	void update();
 };
 

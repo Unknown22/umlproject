@@ -1,5 +1,5 @@
 #include "ClientLogic.h"
-
+#include <iostream>
 
 
 void ClientLogic::listen(std::string statement)
@@ -26,11 +26,12 @@ void ClientLogic::listen(std::string statement)
 					}
 					else if(objectSt[1] == "p2")
 					{
-
+						spriteMap.emplace(std::make_pair(std::string(objectSt[1]), SpriteClient("data//img//p2//playerDown.png", x, y, r)));
 					}
 					else
 					{
-
+						//std::cout << x<<" " <<  " "<< y <<  " "<< r<<endl;
+						spriteMap.emplace(std::make_pair(std::string(objectSt[1]), SpriteClient("data//img//missile.png", x, y, r)));
 					}
 				}
 				else if (objectSt[0] == "delete")
@@ -42,11 +43,8 @@ void ClientLogic::listen(std::string statement)
 					float x = std::stof(objectSt[1]);
 					float y = std::stof(objectSt[2]);
 					float r = std::stof(objectSt[3]);
-					typedef std::map<std::string, SpriteClient>::iterator it_type;
-					for (it_type iterator = spriteMap.begin(); iterator != spriteMap.end(); iterator++) {
-						iterator->second.setPosition(x, y);
-						iterator->second.setRotation(r);
-					}
+					spriteMap.at(objectSt[0]).setPosition(x, y);
+					spriteMap.at(objectSt[0]).setRotation(r);
 				}
 			}
 		}

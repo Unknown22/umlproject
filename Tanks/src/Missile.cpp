@@ -1,5 +1,5 @@
 #include "Missile.h"
-
+#include "ConstantVariables.h"
 
 
 Missile::Missile(float x, float y, float vX, float vY)
@@ -9,6 +9,15 @@ Missile::Missile(float x, float y, float vX, float vY)
 	setY(y);
 	this->vX = vX;
 	this->vY = vY;
+}
+
+Missile & Missile::operator=(const Missile & otherMissile)
+{
+	this->vX = otherMissile.vX;
+	this->vY = otherMissile.vY;
+	this->setX(otherMissile.x);
+	this->setY(otherMissile.y);
+	return *this;
 }
 
 
@@ -34,4 +43,28 @@ void Missile::setvY(float vY)
 float Missile::getvY()
 {
 	return vY;
+}
+
+bool Missile::isInactive()
+{
+	int x = getX();
+	int y = getY();
+	if (x < 0 || y < 0)
+		return true;
+	else if (x > WINDOW_WIDTH || y>WINDOW_HEIGHT)
+		return true;
+	else
+		return false;
+}
+
+void Missile::update()
+{
+	float x = getX();
+	float y = getY();
+	float vX = getvX();
+	float vY = getvY();
+	x += vX;
+	y += vY;
+	setX(x);
+	setY(y);
 }
