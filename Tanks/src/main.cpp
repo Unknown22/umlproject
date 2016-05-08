@@ -4,6 +4,8 @@
 #include "ConstantVariables.h"
 #include "STP/TMXLoader.hpp"
 #include <string>
+#include "Logic.h"
+#include "ClientLogic.h"
 
 sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Tanks!");
 enum GameState { MENU, GAME_CREATE, GAME_JOIN, GAME_OVER, END };
@@ -81,6 +83,8 @@ void runMenu() {
 
 void runGame() {
 	playerController p1("data//img//p1//playerDown.png");//potrzeba 2 slashe
+	Logic logic;
+	ClientLogic clLogic;
 
 	tmx::TileMap map("data//img//maps//test_map.tmx");
 	map.ShowObjects();
@@ -96,12 +100,15 @@ void runGame() {
 				window.close();
 
 		}
-		p1.handleKeyboardEvent();
-		p1.update();
-
+		//p1.handleKeyboardEvent();
+		//p1.update();
+		//logic.init();
+		logic.listen(clLogic.handleKeyboard());
+		clLogic.listen(logic.send());
 		window.clear();
 		window.draw(map);
-		window.draw(p1);
+		window.draw(clLogic.p1);
+		/*window.draw(p1);
 
 		if (p1.missiles.empty() == false)
 		{
@@ -109,7 +116,7 @@ void runGame() {
 			{
 				window.draw(p1.missiles[i]);
 			}
-		}
+		}*/
 		window.display();
 	}
 }
