@@ -21,8 +21,8 @@ void ClientLogic::listen(std::string statement)
 					float r = std::stof(objectSt[4]);
 					if (objectSt[1] == "p1")
 					{
-						SpriteClient sprCl("data//img//p1//playerDown.png", x, y, r);
-						spriteMap.insert(std::pair<string, SpriteClient>(objectSt[1], sprCl));
+						//SpriteClient sprCl("data//img//p1//playerDown.png", x, y, r);
+						spriteMap.emplace(std::make_pair(std::string(objectSt[1]), SpriteClient("data//img//p1//playerDown.png", x, y, r)));
 					}
 					else if(objectSt[1] == "p2")
 					{

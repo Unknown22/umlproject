@@ -7,6 +7,7 @@ class OurSprite : public sf::Sprite
 	
 public:
 	OurSprite(string url);
+	OurSprite::OurSprite(const OurSprite& other);
 	~OurSprite();
 	int getWidth();
 	int getHeight();

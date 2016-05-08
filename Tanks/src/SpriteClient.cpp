@@ -10,6 +10,12 @@ SpriteClient::SpriteClient(string url, float x, float y, float rotation)
 	setRotation(rotation);
 }
 
+SpriteClient::SpriteClient(const SpriteClient & other)
+	:OurSprite(other)
+{
+
+}
+
 
 SpriteClient::~SpriteClient()
 {
