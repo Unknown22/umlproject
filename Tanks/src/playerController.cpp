@@ -83,7 +83,7 @@ void playerController::handleKeyboardEvent()
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
-		MissileController missile("img//missile.png", this->getPosition().x, this->getPosition().y, 0, 0);
+		MissileController missile("data//img//missile.png", this->getPosition().x, this->getPosition().y, 0, 0);
 		float missVX = -missile.NORMAL_SPEED * sin((player.getRotation()*M_PI) / 180.0f);
 		float missVY = missile.NORMAL_SPEED * cos((player.getRotation()*M_PI) / 180.0f);
 		missile.setvX(missVX);
