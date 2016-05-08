@@ -1,6 +1,13 @@
 #include "Player.h"
 
 
+Player::Player(float x, float y, float rotation)
+{
+	setX(x);
+	setY(y);
+	setRotation(rotation);
+}
+
 Player::Player()
 {
 	hp = MAX_HP;

@@ -12,6 +12,7 @@ public:
 	const int MAX_HP = 5;
 	const float NORMAL_SPEED = 0.1;
 	const float NORMAL_ROTATION_ANGLE = 0.1;
+	Player(float x, float y, float rotation);
 	Player();
 	~Player();
 	void gettingHit();
