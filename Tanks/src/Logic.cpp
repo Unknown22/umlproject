@@ -51,7 +51,7 @@ void Logic::listen(std::string statement)
 			}
 			else if (elems[i] == "space")
 			{
-				//obsluga dla strzelania
+				shot();
 			}
 			handlePlayerUpdate();
 		}
@@ -74,6 +74,20 @@ std::vector<std::string>& Logic::split(const std::string & s, char delim, std::v
 		elems.push_back(item);
 	}
 	return elems;
+}
+
+std::string Logic::shot()
+{
+	Missile missile(p1.getX(), p1.getY(), 0, 0);
+	float missVX = -missile.NORMAL_SPEED * sin((p1.getRotation()*M_PI) / 180.0f);
+	float missVY = missile.NORMAL_SPEED * cos((p1.getRotation()*M_PI) / 180.0f);
+	missile.setvX(missVX);
+	missile.setvY(missVY);
+	missiles.push_back(missile);
+	int id = missiles.size() - 1;
+	std::stringstream ss;
+	ss << "spawn>m" << id << ">" << missile.getX() << ">" << missile.getY() << ">" << 0 << ";";
+	return ss.str();
 }
 
 void Logic::handlePlayerUpdate()
