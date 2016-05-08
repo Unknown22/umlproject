@@ -94,14 +94,12 @@ void runGame() {
 	while (window.isOpen())
 	{
 		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				window.close();
+		window.pollEvent(event);
+		
+		if (event.type == sf::Event::Closed)
+			window.close();
 
-		}
-
-		logic.listen(clLogic.handleKeyboard());
+		logic.listen(clLogic.handleKeyboard(event));
 		clLogic.listen(logic.send());
 		window.clear();
 		window.draw(map);

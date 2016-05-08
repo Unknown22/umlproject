@@ -61,7 +61,7 @@ std::vector<std::string>& ClientLogic::split(const std::string & s, char delim, 
 	return elems;
 }
 
-std::string ClientLogic::handleKeyboard()
+std::string ClientLogic::handleKeyboard(sf::Event event)
 {
 	
 	using namespace std;
@@ -87,11 +87,20 @@ std::string ClientLogic::handleKeyboard()
 			statement += ";";
 		statement += "right";
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	if (event.type == sf::Event::KeyPressed)
 	{
-		if (statement.empty() == false)
-			statement += ";";
-		statement += "space";
+		if (event.key.code == sf::Keyboard::Space && spacePressed==false)
+		{
+			spacePressed = true;
+			if (statement.empty() == false)
+				statement += ";";
+			statement += "space";
+		}
+	}
+	if (event.type == sf::Event::KeyReleased)
+	{
+		if (event.key.code == sf::Keyboard::Space)
+			spacePressed = false;
 	}
 	//std::cout << statement;
 	return statement;
