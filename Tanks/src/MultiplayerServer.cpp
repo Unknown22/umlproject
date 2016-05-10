@@ -108,6 +108,8 @@ void MultiplayerServer::listen()
 			event.peer->data = p_nazwa;
 			peer[connected_players_number] = event.peer;
 			connected_players_number++;
+			const char* _init = logic.init().c_str();
+			send_packet(0, _init);
 			break;
 		}
 		case ENET_EVENT_TYPE_RECEIVE:
@@ -119,7 +121,7 @@ void MultiplayerServer::listen()
 			wiadomosc = (char*)event.packet->data;
 			logic.listen(wiadomosc);
 			przetworzone = logic.send();
-			cout << przetworzone << endl;
+			//cout << przetworzone << endl;
 			c_przetworzone = przetworzone.c_str();
 			enet_packet_destroy(event.packet); // clean up the packet now that we're done using it
 			send_packet(0, c_przetworzone);

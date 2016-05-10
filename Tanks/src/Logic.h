@@ -13,7 +13,7 @@ public:
 	void listen(std::string statement);
 	string send();
 	std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems);
-	std::vector<Missile> missiles;
+	map<string, Missile> missiles;
 	std::string shot(Player& p);
 private:
 	Player p1, p2;

@@ -17,9 +17,9 @@ string Logic::init()
 	p1.setX(440);
 	p1.setY(320);
 	p1.setRotation(180);
-	p1.setX(440);
-	p1.setY(50);
-	p1.setRotation(0);
+	p2.setX(440);
+	p2.setY(50);
+	p2.setRotation(0);
 	string s = "spawn>p1>440>320>180;"; //stan poczatkowy, pozycja: x>y>rotation
 	s += "spawn>p2>440>50>0";
 	return s;
@@ -65,12 +65,12 @@ string Logic::send()
 	addState.erase();
 	if (missiles.empty() == false)
 	{
-		for (int i = 0; i < missiles.size(); i++)
-		{
-			ss << "m" << i << ">" << missiles[i].getX() << ">" << missiles[i].getY() << ">" << 0 << ";";
+		typedef std::map<std::string, Missile>::iterator it_type;
+		for (it_type iterator = missiles.begin(); iterator != missiles.end(); iterator++) {
+			ss <<"m"<< iterator->first << ">" << iterator->second.getX() << ">" << iterator->second.getY() << ">" << 0 << ";";
 		}
 	}
-	//tutaj dodanie p2 i wszystich pocisków
+	std::cout << ss.str() << endl;
 	return ss.str();;
 }
 
@@ -86,15 +86,15 @@ std::vector<std::string>& Logic::split(const std::string & s, char delim, std::v
 
 std::string Logic::shot(Player& p)
 {
-	Missile missile(p.getX(), p.getY(), 0, 0);
-	float missVX = -missile.NORMAL_SPEED * sin((p.getRotation()*M_PI) / 180.0f);
-	float missVY = missile.NORMAL_SPEED * cos((p.getRotation()*M_PI) / 180.0f);
-	missile.setvX(missVX);
-	missile.setvY(missVY);
-	missiles.push_back(missile);
-	int id = missiles.size() - 1;
+	int id = missiles.size();
+	string ids = std::to_string(id);
+	missiles.emplace(std::make_pair(std::string(std::to_string(id)), Missile(p.getX(), p.getY(), 0, 0)));
+	float missVX = -missiles.at(ids).NORMAL_SPEED * sin((p.getRotation()*M_PI) / 180.0f);
+	float missVY = missiles.at(ids).NORMAL_SPEED * cos((p.getRotation()*M_PI) / 180.0f);
+	missiles.at(ids).setvX(missVX);
+	missiles.at(ids).setvY(missVY);
 	std::stringstream ss;
-	ss << "spawn>m" << id << ">" << missile.getX() << ">" << missile.getY() << ">" << 0 << ";";
+	ss << "spawn>m" << id << ">" << missiles.at(ids).getX() << ">" << missiles.at(ids).getY() << ">" << 0 << ";";
 	//std::cout << ss.str() << endl;
 	return ss.str();
 }
@@ -117,18 +117,27 @@ void Logic::handleMissilesUpdate()
 {
 	if (missiles.empty() == false)
 	{
-		for (int i = 0; i < missiles.size(); i++)
+		typedef std::map<std::string, Missile>::iterator it_type;
+		it_type iterator = missiles.begin();
+		while (iterator != missiles.end())
 		{
-			missiles[i].update();
-		}
-		for (int i = 0; i < missiles.size(); i++)
-		{
-
-			if (missiles[i].isInactive() == true)
+			if (iterator->second.isInactive() == true)
 			{
-				missiles.erase(missiles.begin() + i);
+				std::stringstream ss;
+				ss << "delete>m" << iterator->first << ";";
+				missiles.erase(iterator);
+				addState += ss.str();
+				std::cout << addState << endl;
+				iterator = missiles.begin();
 			}
-
+			else
+			{
+				++iterator;
+			}
+		}
+		typedef std::map<std::string, Missile>::iterator it_type;
+		for (it_type iterator = missiles.begin(); iterator != missiles.end(); iterator++) {
+			iterator->second.update();
 		}
 	}
 }
@@ -158,7 +167,7 @@ void Logic::updatePlayer(std::vector<std::string>& elems, Player& p)
 		}
 		else if (elems[i] == "space")
 		{
-			addState = shot(p);
+			addState += shot(p);
 		}
 	}
 }
