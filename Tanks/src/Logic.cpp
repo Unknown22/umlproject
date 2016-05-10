@@ -95,7 +95,7 @@ std::string Logic::shot(Player& p)
 	int id = missiles.size() - 1;
 	std::stringstream ss;
 	ss << "spawn>m" << id << ">" << missile.getX() << ">" << missile.getY() << ">" << 0 << ";";
-	std::cout << ss.str() << endl;
+	//std::cout << ss.str() << endl;
 	return ss.str();
 }
 

@@ -119,7 +119,7 @@ void MultiplayerServer::listen()
 			wiadomosc = (char*)event.packet->data;
 			logic.listen(wiadomosc);
 			przetworzone = logic.send();
-			//cout << przetworzone << endl;
+			cout << przetworzone << endl;
 			c_przetworzone = przetworzone.c_str();
 			enet_packet_destroy(event.packet); // clean up the packet now that we're done using it
 			send_packet(0, c_przetworzone);

@@ -112,8 +112,13 @@ void runGame() {
 		if (event.type == sf::Event::Closed)
 			window.close();
 
-		klient.set_message(clLogic.handleKeyboard(event));
-		klient.send_packet(0);
+		if(window.hasFocus())
+		{
+			klient.set_message(clLogic.handleKeyboard(event));
+			//cout << clLogic.handleKeyboard(event) << endl;
+			klient.send_packet(0);
+		}
+		
 		string pozycje;
 		pozycje = klient.get_info_from_server();
 		
