@@ -104,7 +104,7 @@ void MultiplayerClient::listen()
 {
 	ENetEvent event;
 	// processing incoming events:
-	while (enet_host_service(client, &event, 1000) >= 0)
+	while (enet_host_service(client, &event, 1000/60) > 0)
 	{
 		//printf("Checking Incoming\n");
 		switch (event.type)

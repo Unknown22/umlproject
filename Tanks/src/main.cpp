@@ -4,13 +4,19 @@
 #include "ConstantVariables.h"
 #include "STP/TMXLoader.hpp"
 #include <string>
+#include <chrono>
+#include <thread>
 #include "Logic.h"
 #include "ClientLogic.h"
+#include "MultiplayerServer.h"
+#include "MultiplayerClient.h"
 
 sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Tanks!");
 enum GameState { MENU, GAME_CREATE, GAME_JOIN, GAME_OVER, END };
 GameState state;
 sf::Font font;
+MultiplayerServer serwer;
+MultiplayerClient klient;
 
 void menuConstr() {
 	state = END;
@@ -33,7 +39,7 @@ void runMenu() {
 
 	sf::Text menuText[menuItems];
 
-	string str[] = { "Join", "Create","Exit" };
+	string str[] = { "Create", "Join","Exit" };
 	for (int i = 0; i<menuItems; i++)
 	{
 		menuText[i].setFont(font);
@@ -90,6 +96,10 @@ void runGame() {
 	map.GetLayer("map").visible = true;
 	map.GetLayer("collision").visible = false;
 
+	std::this_thread::sleep_for(std::chrono::milliseconds(500));
+	klient.start_client("localhost", 1234);
+
+	
 	clLogic.listen(logic.init());
 	while (window.isOpen())
 	{
@@ -99,6 +109,10 @@ void runGame() {
 		if (event.type == sf::Event::Closed)
 			window.close();
 
+		klient.set_message(clLogic.handleKeyboard(event));
+		klient.send_packet(0);
+		klient.listen();
+		
 		logic.listen(clLogic.handleKeyboard(event));
 		clLogic.listen(logic.send());
 		window.clear();
@@ -110,9 +124,27 @@ void runGame() {
 		
 		window.display();
 	}
+
+	klient.stop_client();
+
 }
 
+void listen_server(MultiplayerServer * _serwer)
+{
+	_serwer->listen();
+}
 
+void run_game()
+{
+	runGame();
+}
+
+void runServer()
+{
+	serwer.start_server(1234);
+	std::thread tServer(listen_server, &serwer);
+	runGame();
+}
 
 int main()
 {
@@ -127,7 +159,7 @@ int main()
 			runMenu();
 			break;
 		case GameState::GAME_CREATE:
-			runGame();
+			runServer();
 			break;
 		case GameState::GAME_JOIN:
 			runGame();
