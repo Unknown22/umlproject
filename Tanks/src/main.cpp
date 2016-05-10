@@ -134,10 +134,6 @@ void listen_server(MultiplayerServer * _serwer)
 	_serwer->listen();
 }
 
-void run_game()
-{
-	runGame();
-}
 
 void runServer()
 {
