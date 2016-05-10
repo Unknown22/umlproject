@@ -84,7 +84,7 @@ std::vector<std::string>& Logic::split(const std::string & s, char delim, std::v
 	return elems;
 }
 
-std::string Logic::shot(Player p)
+std::string Logic::shot(Player& p)
 {
 	Missile missile(p.getX(), p.getY(), 0, 0);
 	float missVX = -missile.NORMAL_SPEED * sin((p.getRotation()*M_PI) / 180.0f);
@@ -95,6 +95,7 @@ std::string Logic::shot(Player p)
 	int id = missiles.size() - 1;
 	std::stringstream ss;
 	ss << "spawn>m" << id << ">" << missile.getX() << ">" << missile.getY() << ">" << 0 << ";";
+	std::cout << ss.str() << endl;
 	return ss.str();
 }
 

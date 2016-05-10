@@ -14,7 +14,7 @@ public:
 	string send();
 	std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems);
 	std::vector<Missile> missiles;
-	std::string shot(Player p);
+	std::string shot(Player& p);
 private:
 	Player p1, p2;
 	void handlePlayerUpdate(Player& p);
