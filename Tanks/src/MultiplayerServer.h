@@ -14,6 +14,7 @@ private:
 	int init_server();
 	int connected_players_number = 0;
 	int max_client_number;
+	const char * c_przetworzone;
 	std::string wiadomosc;
 	std::string przetworzone;
 	ENetHost * server;

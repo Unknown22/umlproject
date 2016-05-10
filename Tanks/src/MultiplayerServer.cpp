@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 #include <cstring>
+#include "Logic.h"
+#include "ClientLogic.h"
 
 MultiplayerServer::MultiplayerServer()
 {
@@ -80,9 +82,12 @@ int MultiplayerServer::init_server()
 
 void MultiplayerServer::listen()
 {
+	Logic logic;
+	ClientLogic clLogic;
+
 	char buf[256];
 	enet_address_get_host_ip(&address, buf, sizeof(buf));
-	std::cout << "Nasluchuje na: " << buf << ":" << address.port << std::endl;
+	//std::cout << "Nasluchuje na: " << buf << ":" << address.port << std::endl;
 	ENetEvent event;
 	// processing incoming events:
 	while (enet_host_service(server, &event, 1000) >= 0)
@@ -109,14 +114,16 @@ void MultiplayerServer::listen()
 		case ENET_EVENT_TYPE_RECEIVE:
 			char bufadres[256];
 			enet_address_get_host_ip(&event.peer->address, bufadres, sizeof(bufadres));
-			std::cout << bufadres << ":" << event.peer->address.port << " przesyla wiadomosc " << (char*)event.packet->data << " na kanale " << (u_int)event.channelID << std::endl;
+			//std::cout << bufadres << ":" << event.peer->address.port << " przesyla wiadomosc " << (char*)event.packet->data << " na kanale " << (u_int)event.channelID << std::endl;
 			fflush(stdout);
-			
+			std::cout << (char*)event.packet->data << std::endl;
 			wiadomosc = (char*)event.packet->data;
-			//przetworzone = przetworz(wiadomosc);
-
+			logic.listen(wiadomosc);
+			przetworzone = logic.send();
+			cout << przetworzone << endl;
+			c_przetworzone = przetworzone.c_str();
 			enet_packet_destroy(event.packet); // clean up the packet now that we're done using it
-			send_packet(0, "odebrano");
+			send_packet(0, c_przetworzone);
 			break;
 		case ENET_EVENT_TYPE_DISCONNECT:
 			printf("  host disconnected.\n");

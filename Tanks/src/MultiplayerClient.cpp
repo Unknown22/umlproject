@@ -128,6 +128,7 @@ void MultiplayerClient::listen()
 			char bufadres[256];
 			enet_address_get_host_ip(&event.peer->address, bufadres, sizeof(bufadres));
 			std::cout << bufadres << ":" << event.peer->address.port << " przesyla wiadomosc " << (char*)event.packet->data << " na kanale " << (u_int)event.channelID << std::endl;
+			od_serwera = (char*)event.packet->data;
 			fflush(stdout);
 			enet_packet_destroy(event.packet); // clean up the packet now that we're done using it
 			break;
@@ -141,4 +142,10 @@ void MultiplayerClient::listen()
 			break;
 		}
 	}
+}
+
+std::string MultiplayerClient::get_info_from_server()
+{
+	listen();
+	return od_serwera;
 }

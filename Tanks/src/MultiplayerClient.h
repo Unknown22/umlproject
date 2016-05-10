@@ -11,10 +11,11 @@ public:
 	void send_packet(int channel);
 	void set_message(std::string message);
 	void listen();
+	std::string get_info_from_server();
 private:
 	int init_client();
 	void connect_to_server();
-	
+	std::string od_serwera;
 	std::string message;
 	ENetAddress address;
 	ENetHost* client;

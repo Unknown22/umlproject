@@ -111,10 +111,11 @@ void runGame() {
 
 		klient.set_message(clLogic.handleKeyboard(event));
 		klient.send_packet(0);
-		klient.listen();
+		string pozycje;
+		pozycje = klient.get_info_from_server();
 		
-		logic.listen(clLogic.handleKeyboard(event));
-		clLogic.listen(logic.send());
+		//logic.listen(clLogic.handleKeyboard(event));
+		clLogic.listen(pozycje);
 		window.clear();
 		window.draw(map);
 		typedef std::map<std::string, SpriteClient>::iterator it_type;
