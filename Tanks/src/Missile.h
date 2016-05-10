@@ -6,7 +6,7 @@ class Missile :
 private:
 	float vX, vY, x, y;
 public:
-	const float NORMAL_SPEED=0.8f;
+	const float NORMAL_SPEED=8.5f;
 	Missile(float x, float y, float vX, float vY);
 	Missile & operator=(const Missile & otherMissile);
 	~Missile();
