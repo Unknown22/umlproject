@@ -65,36 +65,32 @@ std::string ClientLogic::handleKeyboard(sf::Event event)
 {
 	
 	using namespace std;
-	string statement = "";
+	string statement = "p";
+	statement += std::to_string(whichClient);
+	statement += ";";
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
-		statement += "up";
+		statement += "up;";
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
-		statement += "down";
+		statement += "down;";
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
-		if (statement.empty() == false)
-			statement += ";";
-		statement += "left";
+		statement += "left;";
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-		if (statement.empty() == false)
-			statement += ";";
-		statement += "right";
+		statement += "right;";
 	}
 	if (event.type == sf::Event::KeyPressed)
 	{
 		if (event.key.code == sf::Keyboard::Space && spacePressed==false)
 		{
 			spacePressed = true;
-			if (statement.empty() == false)
-				statement += ";";
-			statement += "space";
+			statement += "space;";
 		}
 	}
 	if (event.type == sf::Event::KeyReleased)
@@ -102,14 +98,14 @@ std::string ClientLogic::handleKeyboard(sf::Event event)
 		if (event.key.code == sf::Keyboard::Space)
 			spacePressed = false;
 	}
-	//std::cout << statement;
+	//std::cout << statement<<endl;
 	return statement;
 
 }
 
-ClientLogic::ClientLogic()
+ClientLogic::ClientLogic(int whichCl)
 {
-
+	whichClient = whichCl;
 }
 
 

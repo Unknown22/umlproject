@@ -17,6 +17,7 @@ GameState state;
 sf::Font font;
 MultiplayerServer serwer;
 MultiplayerClient klient;
+int whichClient=1;
 
 void menuConstr() {
 	state = END;
@@ -59,11 +60,13 @@ void runMenu() {
 			if (menuText[0].getGlobalBounds().contains(mouse) && event.type == sf::Event::MouseButtonReleased && event.key.code == sf::Mouse::Left)
 			{
 				state = GAME_CREATE;
+				whichClient = 1;
 			}
 			//join
 			else if (menuText[1].getGlobalBounds().contains(mouse) && event.type == sf::Event::MouseButtonReleased && event.key.code == sf::Mouse::Left)
 			{
 				state = GAME_JOIN;
+				whichClient = 2;
 			}
 			//exit
 			else if (menuText[2].getGlobalBounds().contains(mouse) && event.type == sf::Event::MouseButtonReleased && event.key.code == sf::Mouse::Left)
@@ -89,7 +92,7 @@ void runMenu() {
 
 void runGame() {
 	Logic logic;
-	ClientLogic clLogic;
+	ClientLogic clLogic(whichClient);
 	
 	tmx::TileMap map("data//img//maps//test_map.tmx");
 	map.ShowObjects();

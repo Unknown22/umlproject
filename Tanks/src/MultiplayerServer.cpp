@@ -83,7 +83,6 @@ int MultiplayerServer::init_server()
 void MultiplayerServer::listen()
 {
 	Logic logic;
-	ClientLogic clLogic;
 
 	char buf[256];
 	enet_address_get_host_ip(&address, buf, sizeof(buf));
