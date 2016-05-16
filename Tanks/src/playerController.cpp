@@ -63,17 +63,21 @@ void playerController::handleMissilesUpdate()
 
 void playerController::handleKeyboardEvent()
 {
+
 	player.setvX(0);
 	player.setvY(0);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
-		player.setvX(-player.NORMAL_SPEED * sin((player.getRotation()*M_PI) / 180.0f));
-		player.setvY(player.NORMAL_SPEED * cos((player.getRotation()*M_PI) / 180.0f));
+			player.setvX(-player.NORMAL_SPEED * sin((player.getRotation()*M_PI) / 180.0f));
+			player.setvY(player.NORMAL_SPEED * cos((player.getRotation()*M_PI) / 180.0f));
+
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
-		player.setvX(player.NORMAL_SPEED * sin((player.getRotation()*M_PI) / 180.0f));
-		player.setvY(-player.NORMAL_SPEED * cos((player.getRotation()*M_PI) / 180.0f));
+
+			player.setvX(player.NORMAL_SPEED * sin((player.getRotation()*M_PI) / 180.0f));
+			player.setvY(-player.NORMAL_SPEED * cos((player.getRotation()*M_PI) / 180.0f));
+
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))

@@ -4,6 +4,7 @@
 #include <sstream>
 #include <vector>
 #include "missile.h"
+#include "Collisions.h"
 class Logic
 {
 public:
@@ -17,6 +18,7 @@ public:
 	std::string shot(Player& p);
 private:
 	Player p1, p2;
+	Collisions collisions;
 	void handlePlayerUpdate(Player& p);
 	void handleMissilesUpdate();
 	void updatePlayer(std::vector<std::string> &elems, Player& p);

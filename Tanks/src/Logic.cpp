@@ -14,7 +14,7 @@ Logic::~Logic()
 
 string Logic::init()
 {
-	p1.setX(440);
+	p1.setX(100);
 	p1.setY(320);
 	p1.setRotation(180);
 	p2.setX(440);
@@ -110,7 +110,6 @@ void Logic::handlePlayerUpdate(Player& p)
 	y += vY;
 	p.setX(x);
 	p.setY(y);
-	//std::cout << x << " " << y << endl;
 }
 
 void Logic::handleMissilesUpdate()
@@ -149,13 +148,25 @@ void Logic::updatePlayer(std::vector<std::string>& elems, Player& p)
 		//std::cout << elems[i];
 		if (elems[i] == "up")
 		{
-			p.setvX(-p.NORMAL_SPEED * sin((p.getRotation()*M_PI) / 180.0f));
-			p.setvY(p.NORMAL_SPEED * cos((p.getRotation()*M_PI) / 180.0f));
+			float x1 = p.getX();
+			float y1 = p.getY();
+			if (!collisions.checkCollision( x1 + -p.NORMAL_SPEED * sin((p.getRotation()*M_PI) / 180.0f), y1 + p.NORMAL_SPEED * cos((p.getRotation()*M_PI) / 180.0f), 10, 10)) 
+			{
+				p.setvX(-p.NORMAL_SPEED * sin((p.getRotation()*M_PI) / 180.0f));
+				p.setvY(p.NORMAL_SPEED * cos((p.getRotation()*M_PI) / 180.0f));
+			}
+
 		}
 		else if (elems[i] == "down")
 		{
-			p.setvX(p.NORMAL_SPEED * sin((p.getRotation()*M_PI) / 180.0f));
-			p.setvY(-p.NORMAL_SPEED * cos((p.getRotation()*M_PI) / 180.0f));
+			float x2 = p.getX();
+			float y2 = p.getY();
+			if (!collisions.checkCollision(x2 + p.NORMAL_SPEED * sin((p.getRotation()*M_PI) / 180.0f), y2 + -p.NORMAL_SPEED * cos((p.getRotation()*M_PI) / 180.0f), 10, 10))
+			{
+				p.setvX(p.NORMAL_SPEED * sin((p.getRotation()*M_PI) / 180.0f));
+				p.setvY(-p.NORMAL_SPEED * cos((p.getRotation()*M_PI) / 180.0f));
+			}
+
 		}
 		else if (elems[i] == "left")
 		{

@@ -10,6 +10,8 @@
 #include "ClientLogic.h"
 #include "MultiplayerServer.h"
 #include "MultiplayerClient.h"
+#include "Collisions.h"
+
 
 sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Tanks!");
 enum GameState { MENU, GAME_CREATE, GAME_JOIN, GAME_OVER, END };
@@ -18,6 +20,9 @@ sf::Font font;
 MultiplayerServer serwer;
 MultiplayerClient klient;
 int whichClient=1;
+
+sf::RectangleShape rect;
+Collisions collision;
 
 void menuConstr() {
 	state = END;
@@ -102,7 +107,6 @@ void runGame() {
 	std::this_thread::sleep_for(std::chrono::milliseconds(500));
 	klient.start_client("localhost", 1234);
 
-	
 	clLogic.listen(logic.init());
 	while (window.isOpen())
 	{
@@ -126,6 +130,14 @@ void runGame() {
 		clLogic.listen(pozycje);
 		window.clear();
 		window.draw(map);
+
+		//do rysowania kolizji z obiektem
+		rect.setPosition(collision.result.width, collision.result.height);
+		rect.setScale(sf::Vector2f(collision.result.left, collision.result.top));
+		sf::Color color(255, 0, 0);
+		rect.setOutlineColor(color);
+		window.draw(rect);
+
 		typedef std::map<std::string, SpriteClient>::iterator it_type;
 		for (it_type iterator = clLogic.spriteMap.begin(); iterator != clLogic.spriteMap.end(); iterator++) {
 			window.draw(iterator->second);
