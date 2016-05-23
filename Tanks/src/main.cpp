@@ -141,6 +141,7 @@ void runGame() {
 		typedef std::map<std::string, SpriteClient>::iterator it_type;
 		for (it_type iterator = clLogic.spriteMap.begin(); iterator != clLogic.spriteMap.end(); iterator++) {
 			window.draw(iterator->second);
+
 		}
 		
 		window.display();

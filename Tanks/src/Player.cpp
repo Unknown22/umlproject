@@ -1,4 +1,5 @@
 #include "Player.h"
+#include <iostream>
 
 
 Player::Player(float x, float y, float rotation)
@@ -12,7 +13,7 @@ Player::Player()
 {
 	hp = MAX_HP;
 	vX = 0;
-	vY = 0;
+	vY = 0; 
 }
 
 
@@ -24,6 +25,7 @@ void Player::gettingHit()
 {
 	if (hp > 0)
 		hp--;
+	cout << "player hit!" << endl;
 }
 
 void Player::rotate(float angle)

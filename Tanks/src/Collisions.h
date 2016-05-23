@@ -8,6 +8,7 @@ public:
 	~Collisions();
 	sf::FloatRect result;
 	bool checkCollision(float _x, float _y, int sprite_x, int sprite_y);
+	bool checkMissle(float _x, float _y, float x, float y);
 };
 
 

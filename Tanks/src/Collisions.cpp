@@ -10,6 +10,7 @@ Collisions::Collisions()
 
 Collisions::~Collisions()
 {
+
 }
 
 bool Collisions::checkCollision(float _x, float _y, int sprite_x, int sprite_y)
@@ -39,6 +40,22 @@ bool Collisions::checkCollision(float _x, float _y, int sprite_x, int sprite_y)
 
 		}
 	}
+
+	return colide;
+}
+
+bool Collisions::checkMissle(float _x, float _y, float x, float y)
+{
+	bool colide = false;
+	sf::FloatRect missle(_x, _y, 5, 5);
+
+				sf::FloatRect player(x, y, 32, 32);
+
+				if (player.intersects(missle, result))
+				{
+					colide = true;
+					std::cout << "Shot! " << std::endl;
+				}
 
 	return colide;
 }

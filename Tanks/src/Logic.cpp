@@ -45,9 +45,6 @@ void Logic::listen(std::string statement)
 			updatePlayer(elems, p2);
 			handlePlayerUpdate(p2);
 		}
-		
-		
-		
 	}
 	handleMissilesUpdate();
 }
@@ -118,6 +115,8 @@ void Logic::handleMissilesUpdate()
 	{
 		typedef std::map<std::string, Missile>::iterator it_type;
 		it_type iterator = missiles.begin();
+		it_type iterator_shot = missiles.begin();
+
 		while (iterator != missiles.end())
 		{
 			if (iterator->second.isInactive() == true)
@@ -128,12 +127,24 @@ void Logic::handleMissilesUpdate()
 				addState += ss.str();
 				std::cout << addState << endl;
 				iterator = missiles.begin();
+				
 			}
 			else
 			{
+				while (iterator_shot != missiles.end()) {
+					
+					if (collisions.checkMissle(iterator->second.getX(), iterator->second.getY(), p2.getX(), p2.getY()))
+					{
+						p2.gettingHit();
+					}
+					iterator_shot++;
+				}
 				++iterator;
 			}
 		}
+
+
+
 		typedef std::map<std::string, Missile>::iterator it_type;
 		for (it_type iterator = missiles.begin(); iterator != missiles.end(); iterator++) {
 			iterator->second.update();
