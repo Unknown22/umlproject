@@ -49,9 +49,7 @@ bool Missile::isInactive()
 {
 	int x = getX();
 	int y = getY();
-	if (x < 0 || y < 0)
-		return true;
-	else if (x > WINDOW_WIDTH || y>WINDOW_HEIGHT)
+	if (collisions.checkCollision(x,y,5,5))
 		return true;
 	else
 		return false;

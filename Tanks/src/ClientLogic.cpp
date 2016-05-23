@@ -44,6 +44,7 @@ void ClientLogic::listen(std::string statement)
 					float x = std::stof(objectSt[1]);
 					float y = std::stof(objectSt[2]);
 					float r = std::stof(objectSt[3]);
+					
 					spriteMap.at(objectSt[0]).setPosition(x, y);
 					spriteMap.at(objectSt[0]).setRotation(r);
 				}

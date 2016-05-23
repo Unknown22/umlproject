@@ -17,7 +17,7 @@ bool Collisions::checkCollision(float _x, float _y, int sprite_x, int sprite_y)
 
 	tmx::TileMap map("data//img//maps//test_map.tmx");
 	bool colide = false;
-	sf::FloatRect player(_x, _y, sprite_x, sprite_y);
+	sf::FloatRect object(_x, _y, sprite_x, sprite_y);
 
 	std::cout << _x  << "    " <<  _y << std::endl;
 
@@ -30,7 +30,7 @@ bool Collisions::checkCollision(float _x, float _y, int sprite_x, int sprite_y)
 			{
 				sf::FloatRect collision_layer(i*32, j*32, 32, 32);
 
-				if (collision_layer.intersects(player, result))
+				if (collision_layer.intersects(object, result))
 				{
 					colide = true;
 					std::cout << "Colision! " << std::endl;
