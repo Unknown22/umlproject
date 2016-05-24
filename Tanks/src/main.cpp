@@ -23,6 +23,7 @@ int whichClient=1;
 
 sf::RectangleShape rect;
 Collisions collision;
+string stringAdressIP = "127.0.0.1";
 
 void menuConstr() {
 	state = END;
@@ -41,29 +42,50 @@ void runMenu() {
 	title.setStyle(sf::Text::Bold);
 	title.setPosition(WINDOW_WIDTH / 2 - title.getGlobalBounds().width / 2, 20);
 
-	const int menuItems = 3;
+	const int menuItems = 4;
 
 	sf::Text menuText[menuItems];
 
-	string str[] = { "Create", "Join","Exit" };
+	string str[] = { "Create", "Join","Exit", stringAdressIP };
 	for (int i = 0; i<menuItems; i++)
 	{
 		menuText[i].setFont(font);
 		menuText[i].setCharacterSize(45);
 		menuText[i].setString(str[i]);
 		menuText[i].setPosition(WINDOW_WIDTH / 2 - menuText[i].getGlobalBounds().width / 2, 200 + i * 70);
+		
 	}
+	menuText[3].setPosition(WINDOW_WIDTH / 2 - menuText[3].getGlobalBounds().width / 2 + 150, 270);
+	menuText[1].setPosition(WINDOW_WIDTH / 2 - menuText[1].getGlobalBounds().width / 2 - 150, 200 + 70);
 
 	while (state == MENU)
 	{
 		sf::Vector2f mouse(sf::Mouse::getPosition(window));
 		sf::Event event;
+		
 	
 		while (window.pollEvent(event))
 		{	
+			if (event.type == sf::Event::TextEntered)
+			{
+				if (event.text.unicode == 8) {
+					stringAdressIP = stringAdressIP.substr(0, stringAdressIP.size() - 1);
+					//cout << stringAdressIP << endl;
+
+				}
+				else if ((event.text.unicode < 58 && event.text.unicode > 47) || event.text.unicode == 46)
+				{
+					stringAdressIP += static_cast<char>(event.text.unicode);
+					//cout << stringAdressIP << endl;
+					
+				}
+				menuText[3].setString(stringAdressIP);
+			}
+
 			//create
 			if (menuText[0].getGlobalBounds().contains(mouse) && event.type == sf::Event::MouseButtonReleased && event.key.code == sf::Mouse::Left)
 			{
+				
 				state = GAME_CREATE;
 				whichClient = 1;
 			}
@@ -78,17 +100,24 @@ void runMenu() {
 			{
 				state = END;
 			}
+
+			str[3] = stringAdressIP;
 		}
-		for (int i = 0; i<menuItems; i++)
+
+		for (int i = 0; i<menuItems-1; i++)
 			if (menuText[i].getGlobalBounds().contains(mouse))
 				menuText[i].setColor(sf::Color::Cyan);
 			else menuText[i].setColor(sf::Color::White);
+
+			
 
 			window.clear();
 
 			window.draw(title);
 			for (int i = 0; i<menuItems; i++)
 				window.draw(menuText[i]);
+
+			
 
 			window.display();
 	}
@@ -105,7 +134,8 @@ void runGame() {
 	map.GetLayer("collision").visible = false;
 
 	std::this_thread::sleep_for(std::chrono::milliseconds(500));
-	klient.start_client("localhost", 1234);
+	const char * ip = stringAdressIP.c_str();
+	klient.start_client(ip, 1234);
 
 	clLogic.listen(logic.init());
 	while (window.isOpen())
