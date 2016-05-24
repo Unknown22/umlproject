@@ -20,8 +20,10 @@ private:
 	Player p1, p2;
 	Collisions collisions;
 	void handlePlayerUpdate(Player& p);
-	void handleMissilesUpdate();
+	void handleMissilesUpdate(Player& p);
 	void updatePlayer(std::vector<std::string> &elems, Player& p);
 	string addState;
+	sf::Clock Clock;
+	sf::Time time;
 };
 

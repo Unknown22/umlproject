@@ -1,5 +1,6 @@
 #include "Logic.h"
 #include <iostream>
+#include <Time.h>
 #define M_PI       3.14159265358979323846
 
 
@@ -46,7 +47,9 @@ void Logic::listen(std::string statement)
 			handlePlayerUpdate(p2);
 		}
 	}
-	handleMissilesUpdate();
+	handleMissilesUpdate(p1);
+	handleMissilesUpdate(p2);
+
 }
 
 string Logic::send()
@@ -109,7 +112,7 @@ void Logic::handlePlayerUpdate(Player& p)
 	p.setY(y);
 }
 
-void Logic::handleMissilesUpdate()
+void Logic::handleMissilesUpdate(Player& p)
 {
 	if (missiles.empty() == false)
 	{
@@ -133,7 +136,7 @@ void Logic::handleMissilesUpdate()
 			{
 				while (iterator_shot != missiles.end()) {
 					
-					if (collisions.checkMissle(iterator->second.getX(), iterator->second.getY(), p2.getX(), p2.getY()))
+					if (collisions.checkMissle(iterator->second.getX(), iterator->second.getY(), p.getX(), p.getY()))
 					{
 						p2.gettingHit();
 					}
@@ -190,6 +193,7 @@ void Logic::updatePlayer(std::vector<std::string>& elems, Player& p)
 		else if (elems[i] == "space")
 		{
 			addState += shot(p);
+
 		}
 	}
 }
