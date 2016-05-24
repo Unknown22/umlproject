@@ -75,7 +75,10 @@ void runMenu() {
 				}
 				else if ((event.text.unicode < 58 && event.text.unicode > 47) || event.text.unicode == 46)
 				{
-					stringAdressIP += static_cast<char>(event.text.unicode);
+					if (stringAdressIP.size() < 15) {
+						stringAdressIP += static_cast<char>(event.text.unicode);
+					}
+					
 					//cout << stringAdressIP << endl;
 					
 				}
