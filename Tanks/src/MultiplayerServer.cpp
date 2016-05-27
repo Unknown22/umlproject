@@ -1,9 +1,10 @@
+#define _WINSOCK_DEPRECATED_NO_WARNINGS
 #include "MultiplayerServer.h"
 #include <enet/enet.h>
 #include <cstdio>
 #include <iostream>
 #include <string>
-#include <cstring>
+#include <winsock.h>
 #include "Logic.h"
 #include "ClientLogic.h"
 
@@ -46,6 +47,41 @@ void MultiplayerServer::stop_server()
 	std::cout << "Niszcze server" << std::endl;
 }
 
+std::string MultiplayerServer::get_ip()
+{
+	char ac[80];
+	if (gethostname(ac, sizeof(ac)) == SOCKET_ERROR) {
+		return "Error when getting local host name.";
+	}
+	//cout << "Host name is " << ac << "." << endl;
+
+	struct hostent *phe = gethostbyname(ac);
+	if (phe == 0) {
+		return "Yow! Bad host lookup.";
+	}
+	struct in_addr addr;
+	for (int i = 0; phe->h_addr_list[i] != 0; ++i) {
+		memcpy(&addr, phe->h_addr_list[i], sizeof(struct in_addr));
+	}
+
+	string adres = inet_ntoa(addr);
+
+	return adres;
+}
+
+
+std::string MultiplayerServer::get_server_ip()
+{
+	string adres_ip = "";
+
+	WSAData wsaData;
+	WSAStartup(MAKEWORD(1, 1), &wsaData);
+	adres_ip = get_ip();
+
+	return adres_ip;
+}
+
+
 void MultiplayerServer::send_packet(int _channel, const char* _pack)
 {
 	/* Create a reliable packet of size 7 containing "packet\0" */
@@ -79,6 +115,7 @@ int MultiplayerServer::init_server()
 	atexit(enet_deinitialize);
 	return 0;
 }
+
 
 void MultiplayerServer::listen()
 {

@@ -8,6 +8,7 @@ public:
 	MultiplayerServer();
 	void start_server(int port);
 	void stop_server();
+	static std::string get_server_ip();
 	void send_packet(int channel, const char* pack);
 	void listen();
 private:
@@ -17,6 +18,7 @@ private:
 	const char * c_przetworzone;
 	std::string wiadomosc;
 	std::string przetworzone;
+	static std::string get_ip();
 	ENetHost * server;
 	ENetAddress address;
 	ENetPeer * peer[2] = { 0,0 };

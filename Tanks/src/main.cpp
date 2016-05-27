@@ -216,7 +216,6 @@ void runServer()
 
 int main()
 {
-
 	menuConstr();
 
 	while (state != END)
