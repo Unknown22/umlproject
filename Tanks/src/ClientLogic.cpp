@@ -44,6 +44,20 @@ void ClientLogic::listen(std::string statement)
 					float x = std::stof(objectSt[1]);
 					float y = std::stof(objectSt[2]);
 					float r = std::stof(objectSt[3]);
+					if (objectSt[0] == "p1" || objectSt[0] == "p2")
+					{
+						std::string::size_type sz;   // alias of size_t
+
+						int hp = std::stoi(objectSt[4], &sz);
+						if (objectSt[0] == "p1")
+						{
+							//USTAW ¯YCIE p1 NA hp
+						}
+						else if(objectSt[0] == "p2")
+						{
+							//USTAW ¯YCIE p2 NA hp
+						}
+					}
 					
 					spriteMap.at(objectSt[0]).setPosition(x, y);
 					spriteMap.at(objectSt[0]).setRotation(r);

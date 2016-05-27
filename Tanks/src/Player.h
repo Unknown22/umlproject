@@ -15,6 +15,8 @@ public:
 	Player(float x, float y, float rotation);
 	Player();
 	~Player();
+	void setHp(int _hp);
+	int getHp();
 	void gettingHit();
 	void rotate(float angle);
 	void setvX(float vX);

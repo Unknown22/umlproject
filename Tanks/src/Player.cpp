@@ -21,6 +21,16 @@ Player::~Player()
 {
 }
 
+void Player::setHp(int _hp)
+{
+	this->hp = _hp;
+}
+
+int Player::getHp()
+{
+	return this->hp;
+}
+
 void Player::gettingHit()
 {
 	if (hp > 0)

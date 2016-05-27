@@ -191,7 +191,7 @@ void runGame() {
 		}
 		
 		window.display();
-		backToMenu();
+		//backToMenu();
 
 	}
 

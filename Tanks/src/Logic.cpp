@@ -21,6 +21,8 @@ string Logic::init()
 	p2.setX(440);
 	p2.setY(50);
 	p2.setRotation(0);
+	p1.setHp(5);
+	p2.setHp(5);
 	string s = "spawn>p1>440>320>180;"; //stan poczatkowy, pozycja: x>y>rotation
 	s += "spawn>p2>440>50>0";
 	return s;
@@ -55,8 +57,8 @@ void Logic::listen(std::string statement)
 string Logic::send()
 {
 	std::stringstream ss;
-	ss << "p1>" << p1.getX() << ">" << p1.getY() << ">" << p1.getRotation() << ";";
-	ss << "p2>" << p2.getX() << ">" << p2.getY() << ">" << p2.getRotation() << ";";
+	ss << "p1>" << p1.getX() << ">" << p1.getY() << ">" << p1.getRotation() << ">" << p1.getHp() << ";";
+	ss << "p2>" << p2.getX() << ">" << p2.getY() << ">" << p2.getRotation() << ">" << p2.getHp() << ";";
 	if (addState.empty() == false)
 	{
 		ss << addState;
