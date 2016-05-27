@@ -37,6 +37,7 @@ void menuConstr() {
 	state = MENU;
 }
 
+
 void runMenu() {
 	sf::Text title("Tanks!", font, 80);
 	title.setStyle(sf::Text::Bold);
@@ -127,6 +128,18 @@ void runMenu() {
 
 }
 
+
+void backToMenu() {
+	state = MENU;
+	cout << "state: menu " << state << endl;
+
+	//klient.stop_client();
+	//serwer.stop_server();
+
+	runMenu();
+	
+}
+
 void runGame() {
 	Logic logic;
 	ClientLogic clLogic(whichClient);
@@ -137,9 +150,9 @@ void runGame() {
 	map.GetLayer("collision").visible = false;
 
 	std::this_thread::sleep_for(std::chrono::milliseconds(500));
+
 	const char * ip = stringAdressIP.c_str();
 	klient.start_client(ip, 1234);
-
 	clLogic.listen(logic.init());
 	while (window.isOpen())
 	{
@@ -178,6 +191,8 @@ void runGame() {
 		}
 		
 		window.display();
+		backToMenu();
+
 	}
 
 	klient.stop_client();
@@ -196,6 +211,8 @@ void runServer()
 	std::thread tServer(listen_server, &serwer);
 	runGame();
 }
+
+
 
 int main()
 {
