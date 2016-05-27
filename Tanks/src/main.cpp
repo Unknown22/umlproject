@@ -13,7 +13,7 @@
 #include "Collisions.h"
 
 
-sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Tanks!");
+sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Tanks!", sf::Style::Titlebar | sf::Style::Close);
 enum GameState { MENU, GAME_CREATE, GAME_JOIN, GAME_OVER, END };
 GameState state;
 sf::Font font;
@@ -43,11 +43,18 @@ void runMenu() {
 	title.setStyle(sf::Text::Bold);
 	title.setPosition(WINDOW_WIDTH / 2 - title.getGlobalBounds().width / 2, 20);
 
-	const int menuItems = 4;
+	const int menuItems = 5;
 
 	sf::Text menuText[menuItems];
+	
+	string ipAd = "IP: " + MultiplayerServer::get_server_ip();
+	sf::Text ipAddressText;
+	ipAddressText.setString(ipAd);
+	ipAddressText.setPosition(10, 10);
+	ipAddressText.setFont(font);
+	ipAddressText.setCharacterSize(16);
 
-	string str[] = { "Create", "Join","Exit", stringAdressIP };
+	string str[] = { "Create", "Join","Exit", stringAdressIP, ipAd };
 	for (int i = 0; i<menuItems; i++)
 	{
 		menuText[i].setFont(font);
@@ -58,6 +65,10 @@ void runMenu() {
 	}
 	menuText[3].setPosition(WINDOW_WIDTH / 2 - menuText[3].getGlobalBounds().width / 2 + 150, 270);
 	menuText[1].setPosition(WINDOW_WIDTH / 2 - menuText[1].getGlobalBounds().width / 2 - 150, 200 + 70);
+
+
+	
+
 
 	while (state == MENU)
 	{
@@ -86,6 +97,9 @@ void runMenu() {
 				menuText[3].setString(stringAdressIP);
 			}
 
+			if (event.type == sf::Event::Closed)
+				exit(0);
+
 			//create
 			if (menuText[0].getGlobalBounds().contains(mouse) && event.type == sf::Event::MouseButtonReleased && event.key.code == sf::Mouse::Left)
 			{
@@ -113,14 +127,17 @@ void runMenu() {
 				menuText[i].setColor(sf::Color::Cyan);
 			else menuText[i].setColor(sf::Color::White);
 
+			ipAddressText.setColor(sf::Color::White);
+
 			
 
 			window.clear();
 
 			window.draw(title);
+
 			for (int i = 0; i<menuItems; i++)
 				window.draw(menuText[i]);
-
+			window.draw(ipAddressText);
 			
 
 			window.display();
@@ -160,7 +177,7 @@ void runGame() {
 		window.pollEvent(event);
 		
 		if (event.type == sf::Event::Closed)
-			window.close();
+			exit(0);
 
 		if(window.hasFocus())
 		{
@@ -217,6 +234,8 @@ void runServer()
 int main()
 {
 	menuConstr();
+
+
 
 	while (state != END)
 	{
