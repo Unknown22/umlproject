@@ -194,13 +194,6 @@ void runGame() {
 		window.clear();
 		window.draw(map);
 
-		//do rysowania kolizji z obiektem
-		rect.setPosition(collision.result.width, collision.result.height);
-		rect.setScale(sf::Vector2f(collision.result.left, collision.result.top));
-		sf::Color color(255, 0, 0);
-		rect.setOutlineColor(color);
-		window.draw(rect);
-
 		typedef std::map<std::string, SpriteClient>::iterator it_type;
 		for (it_type iterator = clLogic.spriteMap.begin(); iterator != clLogic.spriteMap.end(); iterator++) {
 			window.draw(iterator->second);

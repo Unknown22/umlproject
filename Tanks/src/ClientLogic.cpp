@@ -52,10 +52,52 @@ void ClientLogic::listen(std::string statement)
 						if (objectSt[0] == "p1")
 						{
 							//USTAW ¯YCIE p1 NA hp
+							if (hp == 3) {
+								spriteMap.emplace("hp1", SpriteClient("data//img//player_hp.png", 45.0, 45.0, 90.0));
+								spriteMap.emplace("hp2", SpriteClient("data//img//gray_hp.png", 200, 312, 7));
+								spriteMap.emplace("hp3", SpriteClient("data//img//player_hp.png", 80, 23, 8));
+							}
+							else if (hp == 2) {
+								spriteMap.emplace(std::make_pair(std::string(objectSt[0]), SpriteClient("data//img//player_hp.png", 45.0, 45.0, 90.0)));
+								spriteMap.emplace("hp2", SpriteClient("data//img//gray_hp.png", 200, 312, 0));
+								spriteMap.emplace("hp3", SpriteClient("data//img//player_hp.png", 80, 23, 0));
+							}
+							else if (hp == 1) {
+								spriteMap.emplace(std::make_pair(std::string(objectSt[0]), SpriteClient("data//img//player_hp.png", 45.0, 45.0, 90.0)));
+								spriteMap.emplace("hp2", SpriteClient("data//img//gray_hp.png", 200, 312, 0));
+								spriteMap.emplace("hp3", SpriteClient("data//img//player_hp.png", 80, 23, 0));
+
+							}
+							else {
+								spriteMap.emplace(std::make_pair(std::string(objectSt[0]), SpriteClient("data//img//player_hp.png", 45.0, 45.0, 90.0)));
+								spriteMap.emplace("hp2", SpriteClient("data//img//gray_hp.png", 200, 312, 0));
+								spriteMap.emplace("hp3", SpriteClient("data//img//player_hp.png", 80, 23, 0));
+							}
 						}
+
 						else if(objectSt[0] == "p2")
 						{
-							//USTAW ¯YCIE p2 NA hp
+							if (hp == 3) {
+								spriteMap.emplace(std::make_pair(std::string(objectSt[0]), SpriteClient("data//img//player_hp.png", 45.0, 45.0, 90.0)));
+								spriteMap.emplace("hp2", SpriteClient("data//img//gray_hp.png", 200, 312, 0));
+								spriteMap.emplace("hp3", SpriteClient("data//img//player_hp.png", 80, 23, 0));
+							}
+							else if (hp == 2) {
+								spriteMap.emplace(std::make_pair(std::string(objectSt[0]), SpriteClient("data//img//player_hp.png", 45.0, 45.0, 90.0)));
+								spriteMap.emplace("hp2", SpriteClient("data//img//gray_hp.png", 200, 312, 0));
+								spriteMap.emplace("hp3", SpriteClient("data//img//player_hp.png", 80, 23, 0));
+							}
+							else if (hp == 1) {
+								spriteMap.emplace(std::make_pair(std::string(objectSt[0]), SpriteClient("data//img//player_hp.png", 45.0, 45.0, 90.0)));
+								spriteMap.emplace("hp2", SpriteClient("data//img//gray_hp.png", 200, 312, 0));
+								spriteMap.emplace("hp3", SpriteClient("data//img//player_hp.png", 80, 23, 0));
+
+							}
+							else {
+								spriteMap.emplace(std::make_pair(std::string(objectSt[0]), SpriteClient("data//img//player_hp.png", 45.0, 45.0, 90.0)));
+								spriteMap.emplace("hp2", SpriteClient("data//img//gray_hp.png", 200, 312, 0));
+								spriteMap.emplace("hp3", SpriteClient("data//img//player_hp.png", 80, 23, 0));
+							}
 						}
 					}
 					

@@ -21,8 +21,8 @@ string Logic::init()
 	p2.setX(440);
 	p2.setY(50);
 	p2.setRotation(0);
-	p1.setHp(5);
-	p2.setHp(5);
+	p1.setHp(3);
+	p2.setHp(3);
 	string s = "spawn>p1>440>320>180;"; //stan poczatkowy, pozycja: x>y>rotation
 	s += "spawn>p2>440>50>0";
 	return s;
@@ -42,15 +42,17 @@ void Logic::listen(std::string statement)
 		{
 			updatePlayer(elems, p1);
 			handlePlayerUpdate(p1);
+			handleMissilesUpdate(p2);
+
 		}
 		else if (elems[0] == "p2")
 		{
 			updatePlayer(elems, p2);
-			handlePlayerUpdate(p2);
+			handlePlayerUpdate(p2);	
+			handleMissilesUpdate(p1);
+
 		}
 	}
-	handleMissilesUpdate(p1);
-	handleMissilesUpdate(p2);
 
 }
 
@@ -132,30 +134,31 @@ void Logic::handleMissilesUpdate(Player& p)
 				addState += ss.str();
 				std::cout << addState << endl;
 				iterator = missiles.begin();
-				
+
+			}
+			else if (collisions.checkMissle(iterator->second.getX(), iterator->second.getY(), p.getX(), p.getY()))
+			{
+				p.gettingHit();
+				std::stringstream ss;
+				ss << "delete>m" << iterator->first << ";";
+				missiles.erase(iterator);
+				addState += ss.str();
+				std::cout << addState << endl;
+				iterator = missiles.begin();
 			}
 			else
 			{
-				while (iterator_shot != missiles.end()) {
-					
-					if (collisions.checkMissle(iterator->second.getX(), iterator->second.getY(), p.getX(), p.getY()))
-					{
-						p2.gettingHit();
-					}
-					iterator_shot++;
-				}
 				++iterator;
 			}
-		}
-
-
+		}				
+	}
 
 		typedef std::map<std::string, Missile>::iterator it_type;
 		for (it_type iterator = missiles.begin(); iterator != missiles.end(); iterator++) {
 			iterator->second.update();
 		}
-	}
 }
+
 
 void Logic::updatePlayer(std::vector<std::string>& elems, Player& p)
 {
