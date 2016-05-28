@@ -1,4 +1,4 @@
-﻿# Tanks
+# Tanks
 
 Gra multiplayer dla dwóch osób. Zniszcz albo zostań zniszczony przez czołg przeciwnika.
 
@@ -8,7 +8,7 @@ Gra multiplayer dla dwóch osób. Zniszcz albo zostań zniszczony przez czołg p
 
 [SFML](www.sfml-dev.org)
 
-[STP] (https://github.com/edoren/STP)
+[STP](https://github.com/edoren/STP)
 
 ### Instalacja
 
