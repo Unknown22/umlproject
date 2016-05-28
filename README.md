@@ -2,17 +2,17 @@
 
 Gra multiplayer dla dwóch osób. Zniszcz albo zostań zniszczony przez czołg przeciwnika.
 
-### Prerequisities
+### Wymagane biblioteki
 
 [ENet](http://enet.bespin.org/index.html)
 
 [SFML](www.sfml-dev.org)
 
-### Installing
+### Instalacja
 
 //TO DO
 
-## Authors
+## Autorzy
 
 Marcin Migda
 
