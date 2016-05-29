@@ -20,6 +20,7 @@ public:
 	~ClientLogic();
 private:
 	bool spacePressed = false;
+	int hp_p1=3, hp_p2=3;
 
 };
 

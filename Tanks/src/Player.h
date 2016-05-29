@@ -9,7 +9,7 @@ private:
 	float vX, vY;
 
 public:
-	const int MAX_HP = 5;
+	const int MAX_HP = 3;
 	const float NORMAL_SPEED = 2.0f;
 	const float NORMAL_ROTATION_ANGLE = 3.5f;
 	Player(float x, float y, float rotation);
