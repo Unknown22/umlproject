@@ -20,7 +20,7 @@ MultiplayerClient klient;
 int whichClient = 1;
 
 sf::RectangleShape rect;
-Collisions collision;
+//Collisions collision;
 string stringAdressIP = "127.0.0.1";
 
 void menuConstr() {
