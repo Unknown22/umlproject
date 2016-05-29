@@ -24,7 +24,7 @@ int ClientLogic::listen(std::string statement)
 						//SpriteClient sprCl("data//img//p1//playerDown.png", x, y, r);
 						spriteMap.emplace(std::make_pair(std::string(objectSt[1]), SpriteClient("data//img//p1//playerDown.png", x, y, r)));
 					}
-					else if(objectSt[1] == "p2")
+					else if (objectSt[1] == "p2")
 					{
 						spriteMap.emplace(std::make_pair(std::string(objectSt[1]), SpriteClient("data//img//p2//playerDown.png", x, y, r)));
 					}
@@ -36,7 +36,7 @@ int ClientLogic::listen(std::string statement)
 				}
 				else if (objectSt[0] == "delete")
 				{
-					std::cout << objectSt[0]<< objectSt[1] << endl;
+					std::cout << objectSt[0] << objectSt[1] << endl;
 					spriteMap.erase(objectSt[1]);
 				}
 				else
@@ -108,7 +108,7 @@ int ClientLogic::listen(std::string statement)
 							}
 						}
 
-						else if(objectSt[0] == "p2")
+						else if (objectSt[0] == "p2")
 						{
 							if (hp == 3) {
 								spriteMap.emplace("hp1_2", SpriteClient("data//img//player_hp.png", 620, 20, 0));
@@ -167,7 +167,7 @@ int ClientLogic::listen(std::string statement)
 							}
 						}
 					}
-					
+
 					spriteMap.at(objectSt[0]).setPosition(x, y);
 					spriteMap.at(objectSt[0]).setRotation(r);
 				}
@@ -189,7 +189,7 @@ std::vector<std::string>& ClientLogic::split(const std::string & s, char delim, 
 
 std::string ClientLogic::handleKeyboard(sf::Event event)
 {
-	
+
 	using namespace std;
 	string statement = "p";
 	statement += std::to_string(whichClient);
@@ -213,7 +213,7 @@ std::string ClientLogic::handleKeyboard(sf::Event event)
 	}
 	if (event.type == sf::Event::KeyPressed)
 	{
-		if (event.key.code == sf::Keyboard::Space && spacePressed==false)
+		if (event.key.code == sf::Keyboard::Space && spacePressed == false)
 		{
 			spacePressed = true;
 			statement += "space;";

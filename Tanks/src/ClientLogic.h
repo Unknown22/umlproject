@@ -8,7 +8,7 @@
 
 class ClientLogic
 {
-	
+
 public:
 	map<string, SpriteClient> spriteMap;
 	int whichClient;
