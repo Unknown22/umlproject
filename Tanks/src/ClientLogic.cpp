@@ -54,6 +54,8 @@ void ClientLogic::listen(std::string statement)
 							//USTAW ¯YCIE p1 NA hp
 							if (hp == 3) {
 								spriteMap.emplace("hp1", SpriteClient("data//img//player_hp.png", 45.0, 45.0, 90.0));
+								spriteMap.at("hp1").setPosition(45.0, 45.0);
+								spriteMap.at("hp1").setRotation(0);
 								spriteMap.emplace("hp2", SpriteClient("data//img//gray_hp.png", 200, 312, 7));
 								spriteMap.emplace("hp3", SpriteClient("data//img//player_hp.png", 80, 23, 8));
 							}
