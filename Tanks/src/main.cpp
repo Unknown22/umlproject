@@ -2,7 +2,6 @@
 #include <iostream>
 #include "ConstantVariables.h"
 #include "STP/TMXLoader.hpp"
-#include <string>
 #include <chrono>
 #include <thread>
 #include "Logic.h"
