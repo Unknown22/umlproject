@@ -6,7 +6,7 @@ Gra multiplayer dla dwóch osób. Zniszcz albo zostań zniszczony przez czołg p
 
 [ENet](http://enet.bespin.org/index.html)
 
-[SFML](www.sfml-dev.org)
+[SFML](http://www.sfml-dev.org)
 
 [STP](https://github.com/edoren/STP)
 
