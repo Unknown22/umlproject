@@ -10,9 +10,17 @@ Gra multiplayer dla dwóch osób. Zniszcz albo zostań zniszczony przez czołg p
 
 [STP](https://github.com/edoren/STP)
 
-### Instalacja
+### Diagramy
 
-//TO DO
+Znajdują się w folderze /Tanks/diagrams
+
+Są to:
+
+1.Diagram klas
+
+2.Diagram aktywności
+
+3.Diagram scenariuszy przypadków użycia
 
 ## Autorzy
 
