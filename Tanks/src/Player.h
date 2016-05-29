@@ -1,6 +1,6 @@
 #pragma once
 #include "ScreenObject.h"
-#include "MissileController.h"
+
 class Player :
 	public ScreenObject
 {

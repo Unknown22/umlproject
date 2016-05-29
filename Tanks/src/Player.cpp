@@ -1,6 +1,7 @@
 #include "Player.h"
 #include <iostream>
 
+using namespace std;
 
 Player::Player(float x, float y, float rotation)
 {

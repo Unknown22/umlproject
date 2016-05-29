@@ -1,5 +1,4 @@
 #include <SFML/Graphics.hpp>
-#include "playerController.h"
 #include <iostream>
 #include "ConstantVariables.h"
 #include "STP/TMXLoader.hpp"
