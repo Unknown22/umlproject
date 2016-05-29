@@ -13,7 +13,7 @@ public:
 	map<string, SpriteClient> spriteMap;
 	int whichClient;
 	//SpriteClient p1;
-	void listen(std::string statement);
+	int listen(std::string statement);
 	std::vector<std::string>& ClientLogic::split(const std::string & s, char delim, std::vector<std::string>& elems);
 	std::string handleKeyboard(sf::Event event);
 	ClientLogic(int whichCl);

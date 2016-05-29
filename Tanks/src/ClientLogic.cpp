@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-void ClientLogic::listen(std::string statement)
+int ClientLogic::listen(std::string statement)
 {
 	std::vector<std::string> elems;
 	split(statement, ';', elems);
@@ -104,6 +104,7 @@ void ClientLogic::listen(std::string statement)
 								spriteMap.emplace("hp3", SpriteClient("data//img//gray_hp.png", 20, 100, 0));
 								spriteMap.at("hp3").setPosition(20, 100);
 								spriteMap.at("hp3").setRotation(0);
+								return 2;
 							}
 						}
 
@@ -162,6 +163,7 @@ void ClientLogic::listen(std::string statement)
 								spriteMap.emplace("hp3_2", SpriteClient("data//img//gray_hp.png", 620, 100, 0));
 								spriteMap.at("hp3_2").setPosition(620, 100);
 								spriteMap.at("hp3_2").setRotation(0);
+								return 1;
 							}
 						}
 					}
@@ -172,6 +174,7 @@ void ClientLogic::listen(std::string statement)
 			}
 		}
 	}
+	return 0;
 }
 
 std::vector<std::string>& ClientLogic::split(const std::string & s, char delim, std::vector<std::string>& elems)

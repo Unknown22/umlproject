@@ -37,7 +37,7 @@ void menuConstr() {
 }
 
 
-void runMenu() {
+void runMenu(int winPlay) {
 	sf::Text title("Tanks!", font, 80);
 	title.setStyle(sf::Text::Bold);
 	title.setPosition(WINDOW_WIDTH / 2 - title.getGlobalBounds().width / 2, 20);
@@ -52,6 +52,20 @@ void runMenu() {
 	ipAddressText.setPosition(10, 10);
 	ipAddressText.setFont(font);
 	ipAddressText.setCharacterSize(16);
+
+	sf::Text winnerInfoText;
+	string winnerInfo = "";
+	if (winPlay != 0) {
+		stringstream ss;
+		ss << winPlay;
+		string strTemp = ss.str();
+		winnerInfo = "PLAYER " + strTemp + " WIN";
+		winnerInfoText.setString(winnerInfo);
+		winnerInfoText.setFont(font);
+		winnerInfoText.setCharacterSize(16);
+		winnerInfoText.setColor(sf::Color::Red);
+		winnerInfoText.setPosition(WINDOW_WIDTH / 2 - winnerInfoText.getGlobalBounds().width / 2, 150);
+	}
 
 	string str[] = { "Create", "Join","Exit", stringAdressIP, ipAd };
 	for (int i = 0; i<menuItems; i++)
@@ -137,6 +151,7 @@ void runMenu() {
 			for (int i = 0; i<menuItems; i++)
 				window.draw(menuText[i]);
 			window.draw(ipAddressText);
+			window.draw(winnerInfoText);
 			
 
 			window.display();
@@ -144,21 +159,21 @@ void runMenu() {
 
 }
 
-
-void backToMenu() {
+void backToMenu(int winPlay) {
 	state = MENU;
 	cout << "state: menu " << state << endl;
 
 	//klient.stop_client();
-	//serwer.stop_server();
+	serwer.stop_server();
 
-	runMenu();
-	
+	runMenu(winPlay);
+
 }
 
 void runGame() {
 	Logic logic;
 	ClientLogic clLogic(whichClient);
+	int winnerPlayer = 0;
 	
 	tmx::TileMap map("data//img//maps//test_map.tmx");
 	map.ShowObjects();
@@ -189,7 +204,15 @@ void runGame() {
 		pozycje = klient.get_info_from_server();
 		
 		//logic.listen(clLogic.handleKeyboard(event));
-		clLogic.listen(pozycje);
+		//clLogic.listen(pozycje);
+		winnerPlayer = clLogic.listen(pozycje);
+
+		if (winnerPlayer != 0) {
+			if (winnerPlayer == 1)
+				backToMenu(1);
+			else
+				backToMenu(2);
+		}
 		window.clear();
 		window.draw(map);
 
@@ -234,7 +257,7 @@ int main()
 		switch (state)
 		{
 		case GameState::MENU:
-			runMenu();
+			runMenu(0);
 			break;
 		case GameState::GAME_CREATE:
 			runServer();
