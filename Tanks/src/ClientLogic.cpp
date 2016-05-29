@@ -218,6 +218,7 @@ std::string ClientLogic::handleKeyboard(sf::Event event)
 			spacePressed = true;
 			statement += "space;";
 		}
+
 	}
 	if (event.type == sf::Event::KeyReleased)
 	{
@@ -238,5 +239,4 @@ ClientLogic::ClientLogic(int whichCl)
 ClientLogic::~ClientLogic()
 {
 }
-
 

@@ -20,5 +20,6 @@ public:
 	~ClientLogic();
 private:
 	bool spacePressed = false;
+
 };
 
