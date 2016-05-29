@@ -4,6 +4,8 @@ Gra multiplayer dla dwóch osób. Zniszcz albo zostań zniszczony przez czołg p
 
 ### Wymagane biblioteki
 
+Wszystkie wymagane biblioteki oraz pliki dll są folderze /Tanks/libs
+
 [ENet](http://enet.bespin.org/index.html)
 
 [SFML](http://www.sfml-dev.org)
