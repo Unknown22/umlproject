@@ -20,7 +20,7 @@ bool Collisions::checkCollision(float _x, float _y, int sprite_x, int sprite_y)
 	bool colide = false;
 	sf::FloatRect object(_x, _y, sprite_x, sprite_y);
 
-	std::cout << _x  << "    " <<  _y << std::endl;
+	//std::cout << _x  << "    " <<  _y << std::endl;
 
 	for (int i = 0; i < 20; i++)
 	{
@@ -34,7 +34,7 @@ bool Collisions::checkCollision(float _x, float _y, int sprite_x, int sprite_y)
 				if (collision_layer.intersects(object, result))
 				{
 					colide = true;
-					std::cout << "Colision! " << std::endl;
+					//std::cout << "Colision! " << std::endl;
 				}
 			}
 
@@ -54,7 +54,7 @@ bool Collisions::checkMissle(float _x, float _y, float x, float y)
 				if (player.intersects(missle, result))
 				{
 					colide = true;
-					std::cout << "Shot! " << std::endl;
+					//std::cout << "Shot! " << std::endl;
 				}
 
 	return colide;

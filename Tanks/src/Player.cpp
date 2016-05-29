@@ -36,7 +36,7 @@ void Player::gettingHit()
 {
 	if (hp > 0)
 		hp--;
-	cout << "player hit!" << endl;
+	//cout << "player hit!" << endl;
 }
 
 void Player::rotate(float angle)

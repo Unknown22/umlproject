@@ -36,7 +36,6 @@ int ClientLogic::listen(std::string statement)
 				}
 				else if (objectSt[0] == "delete")
 				{
-					std::cout << objectSt[0] << objectSt[1] << endl;
 					spriteMap.erase(objectSt[1]);
 				}
 				else

@@ -75,7 +75,6 @@ string Logic::send()
 			ss <<"m"<< iterator->first << ">" << iterator->second.getX() << ">" << iterator->second.getY() << ">" << 0 << ";";
 		}
 	}
-	std::cout << ss.str() << endl;
 	return ss.str();;
 }
 
@@ -133,7 +132,7 @@ void Logic::handleMissilesUpdate(Player& p)
 				ss << "delete>m" << iterator->first << ";";
 				missiles.erase(iterator);
 				addState += ss.str();
-				std::cout << addState << endl;
+				//std::cout << addState << endl;
 				iterator = missiles.begin();
 
 			}
@@ -144,7 +143,7 @@ void Logic::handleMissilesUpdate(Player& p)
 				ss << "delete>m" << iterator->first << ";";
 				missiles.erase(iterator);
 				addState += ss.str();
-				std::cout << addState << endl;
+				//std::cout << addState << endl;
 				iterator = missiles.begin();
 			}
 			else
