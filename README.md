@@ -46,8 +46,10 @@ Można uruchomić grę.
 ### Obsługa
 
 Jeden gracz wybiera opcję Create Server.
+
 Drugi gracz wpisuje ip gracza-serwera do którego chce się podłączyć oraz naciska Join.
 Każdy z graczy ma 3 życia.
+
 Po zakończeniu gra wyświetla, który gracz wygrał oraz wraca do głownego menu.
 
 ### Diagramy
