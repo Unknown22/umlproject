@@ -1,22 +1,23 @@
 #include "Collisions.h"
-#include "STP/TMXLoader.hpp"
+
 #include <iostream>
 
 
 Collisions::Collisions()
 {
+	map=new tmx::TileMap("data//img//maps//test_map.tmx");
 }
 
 
 Collisions::~Collisions()
 {
-
+	delete map;
 }
 
 bool Collisions::checkCollision(float _x, float _y, int sprite_x, int sprite_y)
 {
 
-	tmx::TileMap map("data//img//maps//test_map.tmx");
+	
 	bool colide = false;
 	sf::FloatRect object(_x, _y, sprite_x, sprite_y);
 
@@ -27,7 +28,7 @@ bool Collisions::checkCollision(float _x, float _y, int sprite_x, int sprite_y)
 		for (int j = 0; j < 15; j++)
 		{
 			
-			if (!map.GetLayer("collision").GetTile(i, j).empty())
+			if (!map->GetLayer("collision").GetTile(i, j).empty())
 			{
 				sf::FloatRect collision_layer(i*32, j*32, 32, 32);
 

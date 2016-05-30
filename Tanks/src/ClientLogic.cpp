@@ -83,12 +83,12 @@ int ClientLogic::listen(std::string statement)
 								else if (hp == 1) {
 									spriteMap.erase("hp2");
 									spriteMap.emplace("hp2", SpriteClient("data//img//gray_hp.png", 20, 60, 0));
-									spriteMap.at("hp2").setPosition(20, 100);
+									spriteMap.at("hp2").setPosition(20, 60);
 									spriteMap.at("hp2").setRotation(0);
 								}
 								else {
-									spriteMap.emplace("hp3", SpriteClient("data//img//gray_hp.png", 20, 100, 0));
-									spriteMap.at("hp3").setPosition(20, 100);
+									spriteMap.emplace("hp3", SpriteClient("data//img//gray_hp.png", 20, 20, 0));
+									spriteMap.at("hp3").setPosition(20, 20);
 									spriteMap.at("hp3").setRotation(0);
 									return 2;
 								}

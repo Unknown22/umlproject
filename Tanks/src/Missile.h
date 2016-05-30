@@ -7,7 +7,6 @@ class Missile :
 {
 private:
 	float vX, vY, x, y;
-	Collisions collisions;
 
 public:
 	const float NORMAL_SPEED=8.5f;
@@ -18,7 +17,6 @@ public:
 	float getvX();
 	void setvY(float vY);
 	float getvY();
-	bool isInactive();
 	void update();
 };
 

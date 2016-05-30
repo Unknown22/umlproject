@@ -126,7 +126,7 @@ void Logic::handleMissilesUpdate(Player& p)
 
 		while (iterator != missiles.end())
 		{
-			if (iterator->second.isInactive() == true)
+			if (collisions.checkCollision(iterator->second.getX(), iterator->second.getY(), 5, 5))
 			{
 				std::stringstream ss;
 				ss << "delete>m" << iterator->first << ";";

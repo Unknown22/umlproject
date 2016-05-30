@@ -45,15 +45,6 @@ float Missile::getvY()
 	return vY;
 }
 
-bool Missile::isInactive()
-{
-	int x = getX();
-	int y = getY();
-	if (collisions.checkCollision(x,y,5,5))
-		return true;
-	else
-		return false;
-}
 
 void Missile::update()
 {
