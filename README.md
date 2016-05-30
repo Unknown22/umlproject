@@ -34,6 +34,13 @@ ws2_32.lib
 winmm.lib
 STP-d.lib
 
+Następnie wszystkie pliki dll z folderu /Tanks/libs/dlls kopiujemy do folderu Debug czyli tego, w którym nasza gra będzie uruchamiana. Są to dll bibliotek potrzebnych do uruchomienia gry.
+
+Należy również pamiętać, że folder /Tanks/data musi znajdować się na tym samym poziomie co folder src czyli:
+> /src
+
+>/data
+
 
 
 ### Diagramy
